@@ -14,18 +14,26 @@ body {
   color: #333;
   background: #fff;
   margin: 0;
-  padding: 20px;
+  padding: 30px;
 }
+#rapper { width: 670px; height: 470px; margin: 0 auto; }
 a { text-decoration: none; }
 a:link { color: #36c; }
 a:visited { color: #13a; }
 a:hover { color: #33A; text-decoration: underline; }
 a:active { color: #aa0; }
-h1 { font: 400%/1 BlackoutMidnight, "Helvetica Neue", Helvetica, Arial, "Liberation Sans", FreeSans, sans-serif; }
+h1 { font: 450%/1 BlackoutMidnight, "Helvetica Neue", Helvetica, Arial, "Liberation Sans", FreeSans, sans-serif; }
 h1 a:link, h1 a:visited { color: #000 }
 ul { list-style-type: none; }
-header { padding: 20px; }
+#page-header { padding: 20px; text-align: center }
 section { padding: 20px; }
-section header { padding: 0; font: 100%/1 BlackoutMidnight, "Helvetica Neue", Helvetica, Arial, "Liberation Sans", FreeSans, sans-serif; }
-.adr span:after { content: "," }
-.adr span:last-child:after { content: "" }
+section header { padding: 0 33px; font: 100%/1 BlackoutMidnight, "Helvetica Neue", Helvetica, Arial, "Liberation Sans", FreeSans, sans-serif; }
+.adr {margin-left: -29px}
+.adr .heart {width: 29px; visibility: hidden}
+.adr:hover .heart {visibility: visible}
+.email .name:after { content: "@" }
+.elsewhere { float: right; width: 200px; text-align: right }
+.url.asciidicks .dick { display: none }
+.url.asciidicks:hover { text-decoration: none }
+.url.asciidicks:hover .name { display: none }
+.url.asciidicks:hover .dick { display: inline }
