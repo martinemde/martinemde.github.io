@@ -1,0 +1,31 @@
+* { margin: 0; padding: 0; } 
+@font-face {
+  font-family: 'BlackoutMidnight';
+  src: url('type/Blackout-Midnight-webfont.eot');
+  src: url('type/Blackout-Midnight-webfont.eot?iefix') format('eot'),
+       url('type/Blackout-Midnight-webfont.woff') format('woff'),
+       url('type/Blackout-Midnight-webfont.ttf') format('truetype'),
+       url('type/Blackout-Midnight-webfont.svg#webfontVDQbtLmu') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font: 20px/1.2 "Helvetica Neue", Helvetica, Arial, "Liberation Sans", FreeSans, sans-serif;
+  color: #333;
+  background: #fff;
+  margin: 0;
+  padding: 20px;
+}
+a { text-decoration: none; }
+a:link { color: #36c; }
+a:visited { color: #13a; }
+a:hover { color: #33A; text-decoration: underline; }
+a:active { color: #aa0; }
+h1 { font: 400%/1 BlackoutMidnight, "Helvetica Neue", Helvetica, Arial, "Liberation Sans", FreeSans, sans-serif; }
+h1 a:link, h1 a:visited { color: #000 }
+ul { list-style-type: none; }
+header { padding: 20px; }
+section { padding: 20px; }
+section header { padding: 0; font: 100%/1 BlackoutMidnight, "Helvetica Neue", Helvetica, Arial, "Liberation Sans", FreeSans, sans-serif; }
+.adr span:after { content: "," }
+.adr span:last-child:after { content: "" }
