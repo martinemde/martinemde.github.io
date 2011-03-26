@@ -23,16 +23,20 @@ a:visited { color: #13a; }
 a:hover { color: #33A; text-decoration: underline; }
 a:active { color: #aa0; }
 h1 { font: 450%/1 BlackoutMidnight, "Helvetica Neue", Helvetica, Arial, "Liberation Sans", FreeSans, sans-serif; }
-h1 a:link, h1 a:visited { color: #000 }
+h1 a:link, h1 a:visited { color: #000; text-decoration: none }
 ul { list-style-type: none; }
 #page-header { padding: 20px; text-align: center }
 section { padding: 20px; }
 section header { padding: 0 33px; font: 100%/1 BlackoutMidnight, "Helvetica Neue", Helvetica, Arial, "Liberation Sans", FreeSans, sans-serif; }
 .adr {margin-left: -29px}
-.adr .heart {width: 29px; visibility: hidden}
+.adr .heart {width: 29px; visibility: hidden; font: 100% Monaco, "Lucida Console", monospace;}
 .adr:hover .heart {visibility: visible}
 .email .name:after { content: "@" }
-.elsewhere { float: right; width: 200px; text-align: right }
+.elsewhere { width: 200px; text-align: right }
+.people { width: 243px; width: 450px; text-align: right }
+.people header { padding-right: 76px }
+.people a { width: 70px; display: inline-block; text-align: left }
+.stuff { padding-right: 55px; text-align: right }
 .url.asciidicks .dick { display: none }
 .url.asciidicks:hover { text-decoration: none }
 .url.asciidicks:hover .name { display: none }
