@@ -1,0 +1,91 @@
+!!!
+%html{html_attrs}
+  %head
+    %meta(content="text/html; charset=UTF-8" http-equiv="Content-Type")
+    %meta(name="author" content="Martin Emde")
+    %meta(name="description" content="A classy, high-end attention escort.")
+    %meta(name="viewport" content="width=700")
+    %title Martin Emde
+    %link(href="style.css" rel="stylesheet" media="screen" type="text/css")
+    %link(href="http://microformats.org/profile/hcard" rel="profile")
+    -#%script{ :type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" }
+  %body.vcard(itemscope itemtype="http://data-vocabulary.org/Person")
+    #rapper.j-roc.nomsayin
+      %header#page-header
+        %h1.fn(itemprop="name")
+          %a.url(itemprop="url" href="http://martinemde.com" rel="bookmark" title="A classy, high-end attention escort")
+            %span.given-name(itemprop="given-name") Martin
+            %span.family-name(itemprop="family-name") Emde
+        %p.wtf
+          %small Walking around dropping burning silver paper cranes.
+        %p.adr(itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address")
+          %span.heart(title="Mission Dolores is awesome") &lt;3
+          %a(rel="external" href="http://maps.google.com/maps?q=Mission+Dolores+san+francisco&t=k&z=16&lci=com.panoramio.all")
+            %span.neighborhood Mission Dolores
+            %span.locality(itemprop="locality") San Francisco
+            %span.region(itemprop="region") CA
+            %span.country-name(itemprop="country-name") USA
+        %p.email(itemprop="email")
+          %span.name> me
+          %span.domain martinemde.com
+        %p.contact-tel
+          %a.tel(itemprop="tel" href="tel:1-415-413-8412") +1-415-413-8412
+
+      %section.elsewhere
+        %header
+          %h3 Elsewhere
+        %ul
+          %li
+            %a.url(rel="external" href="http://twitter.com/martinemde" title="I swear and complain about grammar and shitty internetz on Twitter.") tweet
+            me
+          %li
+            %a.url(rel="external" href="https://github.com/martinemde" title="When I make code, I put it here, unless I don't.") github
+            me
+          %li
+            %a.url(href="http://tumblr.martinemde.com" title="Sometimes I post random bits here.") tumblr
+            me
+          %li
+            %a.url(href="http://blog.martinemde.com" title="Would you believe I have a blog to which I never post?") blog
+            me
+          %li
+            %a.url(rel="external" href="http://lmgtfy.com/?q=martin+emde" title="Beware evil doppelgangers.") google
+            me
+
+      %section.people
+        %header
+          %h3 People
+        %ul
+          %li
+            My beautiful wife&nbsp;
+            %a(rel="spouse muse met external" href="http://thekewe.com")> kewe
+          %li
+            My dad&nbsp;
+            %a(rel="parent met external" href="http://vonemdeheim.com")> brione
+
+      %section.stuff
+        %header
+          %h3 More
+        %ul
+          %li
+            In my free time, I program for
+            %a.url.org(itemprop="affiliation" rel="external" href="http://engineyard.com" title="Engine Yard loves that I put their name right next to a link to ascii dicks.") Engine Yard
+          %li
+            Fallout nerds might like
+            %a.url(rel="external" href="http://reactorhacker.martinemde.com" title="Hack some Fallout computers") Reactor Hacker
+          %li
+            Would you believe I wasted time making&nbsp;
+            %a.asciidicks.url(rel="external" href="http://asciidicks.com" title="8=====D~~")>
+              %span.name> asciidicks.com
+              %span.dick> 8=======D~~
+            ?
+
+      :javascript
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-19274402-1']);
+        _gaq.push(['_setDomainName', '.martinemde.com']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
