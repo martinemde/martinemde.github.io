@@ -33,16 +33,14 @@ section header { padding: 0 33px; font: 100%/1 BlackoutMidnight, "Helvetica Neue
 .adr .heart {width: 29px; visibility: hidden; font: 100% Monaco, "Lucida Console", monospace;}
 .adr:hover .heart {visibility: visible}
 .email .name:after { content: "@" }
-.elsewhere { width: 200px; text-align: right }
-.elsewhere li { color: #333 }
-.elsewhere li + li { color: #777 }
-.elsewhere li + li + li { color: #aaa }
-.elsewhere li + li + li + li { color: #ccc }
-.elsewhere li + li + li + li + li { color: #eee }
-.people { width: 243px; width: 450px; text-align: right }
-.people header { padding-right: 76px }
-.people a { width: 70px; display: inline-block; text-align: left }
+.elsewhere { width: 165px; text-align: right }
+.elsewhere header { padding-right: 0 }
+.people { width: 380px; text-align: right }
+.people header { padding-right: 66px }
+.people a { width: 60px; display: inline-block; text-align: right }
 .stuff { padding-right: 55px; text-align: right }
+.stuff header { padding-right: 154px }
+.stuff a { width: 150px; display: inline-block; text-align: right }
 .gobeering { text-align: center; }
 .url.asciidicks .dick { display: none }
 .url.asciidicks:hover { text-decoration: none }
