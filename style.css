@@ -28,19 +28,15 @@ ul { list-style-type: none; }
 p { margin: 0; }
 #page-header { padding: 20px; text-align: center }
 section { padding: 20px; }
-section header { padding: 0 33px; font: 100%/1 BlackoutMidnight, "Helvetica Neue", Helvetica, Arial, "Liberation Sans", FreeSans, sans-serif; }
+section header { padding: 0; font: 100%/1 BlackoutMidnight, "Helvetica Neue", Helvetica, Arial, "Liberation Sans", FreeSans, sans-serif; }
 .adr {margin-left: -29px}
 .adr .heart {width: 29px; visibility: hidden; font: 100% Monaco, "Lucida Console", monospace;}
 .adr:hover .heart {visibility: visible}
 .email .name:after { content: "@" }
 .elsewhere { width: 165px; text-align: right }
-.elsewhere header { padding-right: 0 }
-.people { width: 380px; text-align: right }
-.people header { padding-right: 66px }
+.people { width: 80px; margin: 0 auto; text-align: right }
 .people a { width: 60px; display: inline-block; text-align: right }
-.stuff { padding-right: 55px; text-align: right }
-.stuff header { padding-right: 154px }
-.stuff a { width: 150px; display: inline-block; text-align: right }
+.stuff { padding-right: 58px; text-align: right }
 .gobeering { text-align: center; }
 .url.asciidicks .dick { display: none }
 .url.asciidicks:hover { text-decoration: none }
