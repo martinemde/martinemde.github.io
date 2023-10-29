@@ -2,19 +2,17 @@ body { padding: 20px; background-color: #fff; color: #333; font-family: "Open Sa
 article { margin: 20px auto; width: 480px; }
 
 a { text-decoration: none; }
-a:link { color: #aa0; }
-a:visited { color: #990; }
-a:hover { color: #770; text-decoration: underline; }
-a:active { color: #aa0; }
+a:link { color: rgb(209, 24, 129); }
+a:visited { color: rgb(154, 11, 190); }
+a:hover { color: rgb(251, 62, 207); text-decoration: underline; }
+a:active { color: rgb(170, 0, 136); }
 
 h1 { font-size: 380%; margin-left: -3px }
 h1 .by { font-size: 40%; }
 h2 { font-size: 150%; padding: 0; margin: 0 }
 
-ul.styled { list-style-type: none; }
-ul.styled li:before { content: "- "; font-family: "Lucida Console", Monaco, "Courier New", Courier, monospace; }
-ul.styled li:hover:before { content: "| "; color: #aa0; }
-ul.focus  li { color: #888; }
+ul { list-style-type: none; padding: 0; margin: 0 }
+ul li:before { content: "- "; font-family: "Lucida Console", Monaco, "Courier New", Courier, monospace; }
 ul.inline li:first-child { padding-left: 0 }
 ul.inline li:before { content: "- "; }
 
@@ -24,9 +22,4 @@ section header { padding: 0; margin: 0 }
 section header h3 { padding: 0; margin: 0 }
 
 .email .name:after { content: "@" }
-.gobeering { text-align: center; }
-
-a.asciidicks .dick { display: none }
-a.asciidicks:hover { text-decoration: none }
-a.asciidicks:hover .name { display: none }
-a.asciidicks:hover .dick { display: inline }
+.heart { color: rgb(255, 0, 100); }
