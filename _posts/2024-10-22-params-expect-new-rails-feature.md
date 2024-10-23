@@ -6,7 +6,7 @@ excerpt_separator: <!--more-->
 
 As part of [Cloud City Development](https://cloudcity.io)'s ongoing effort to support Ruby open source, I'm proud to announce [the new `params.expect` feature](https://github.com/rails/rails/pull/51674) I recently added to Rails 8.
 
-## params: a web app attack vector
+## params: An Attack Vector
 
 All web application programmers learn not to trust user input.
 
