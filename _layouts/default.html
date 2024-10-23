@@ -14,16 +14,28 @@
   </head>
   <body class="bg-stone-100 dark:bg-slate-800 text-slate-900 dark:text-white">
     <div class="min-h-screen flex flex-col">
-      <header class="w-full max-w-2xl mx-auto py-8">
+      <header class="w-full max-w-3xl mx-auto px-8 py-8">
         <h1 class="text-4xl font-bold">
           <a href="/">{{ site.title }}</a>
         </h1>
       </header>
-      <main class="max-w-3xl mx-auto py-8 px-10 bg-white dark:bg-slate-950 rounded-lg mb-20 shadow-lg">
-        <article class="prose prose-md prose-slate dark:prose-invert">
-          {{ content }}
-        </article>
+      <main class="max-w-full lg:max-w-screen-xl mx-auto px-8 mb-20">
+
+        {{ content }}
       </main>
     </div>
+    <script type="text/javascript">
+      //<![CDATA[
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-19274402-1']);
+        _gaq.push(['_setDomainName', '.martinemde.com']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      //]]>
+    </script>
   </body>
 </html>

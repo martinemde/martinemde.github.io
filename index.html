@@ -2,35 +2,27 @@
 layout: default
 title: "Martin Emde"
 ---
-<article class="mb-10">
-  <h2 class="mt-0">About</h2>
-  <p>
-    I'm a <abbr title="A Software Engineering Consultant, but like since it's Star Wars themed...">Bounty Hunter</abbr> for hire at <a href="https://cloudcity.io/citizens/martin/" itemprop="affiliation" rel="external" title="Where I work.">Cloud City Development</a>
-    and a maintainer of <a href="https://github.com/rubygems/rubygems" rel="external">RubyGems</a>, <a href="https://rubygems.org" rel="external">RubyGems.org</a> &amp; Bundler.
-    Learn more about my work on <a href="https://github.com/martinemde" rel="external" title="When I make code, I put it here unless I don't.">GitHub</a>.
-  </p>
+<article class="py-8 px-10 bg-white dark:bg-slate-950 rounded-lg mb-10 shadow-lg">
+  <div class="prose prose-lg prose-slate dark:prose-invert">
+    <!-- <h2 class="mt-0">About</h2> -->
+    <p>
+      I'm a <abbr title="A Software Engineering Consultant, but, like, since it's Star Wars themed...">Bounty Hunter</abbr> for hire at <a href="https://cloudcity.io/citizens/martin/" itemprop="affiliation" rel="external" title="Where I work.">Cloud City Development</a>
+      and a maintainer of <a href="https://github.com/rubygems/rubygems" rel="external">RubyGems</a>, <a href="https://rubygems.org" rel="external">RubyGems.org</a> &amp; Bundler.
+      Learn more about my work on <a href="https://github.com/martinemde" rel="external" title="When I make code, I put it here unless I don't.">GitHub</a>.
+    </p>
+  </div>
 </article>
 <aside>
-  <h2>Posts</h2>
+  <h2 class="text-3xl font-semibold mb-6">Posts</h2>
   {% for post in site.posts %}
-  <div>
-    <h3><a href="{{ post.url }}" class="no-underline">{{ post.title }}</a></h3>
-    <div>
-      {{ post.excerpt }}
+    <div class="pt-8 pb-14 px-10 bg-white dark:bg-slate-950 rounded-lg mb-10 shadow-lg">
+      <div class="prose-sm md:prose-md lg:prose-lg prose-slate dark:prose-invert">
+        <h2><a href="{{ post.url }}" class="no-underline">{{ post.title }}</a></h2>
+        <div>
+          {{ post.excerpt }}
+        </div>
+          <p class="text-center"><a href="{{ post.url }}" class="no-underline hover:underline hover:text-indigo-800">Continue reading&hellip;</a></p>
+      </div>
     </div>
-  </div>
   {% endfor %}
 </aside>
-<script type="text/javascript">
-  //<![CDATA[
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-19274402-1']);
-    _gaq.push(['_setDomainName', '.martinemde.com']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  //]]>
-</script>

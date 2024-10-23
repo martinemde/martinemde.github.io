@@ -1,17 +1,16 @@
 ---
 layout: post
-title:  "params.expect - How To Use The New Ruby on Rails Feature"
+title:  "How to: Rails `params.expect`"
 excerpt_separator: <!--more-->
 ---
 
-# {{ page.title }}
+As part of [Cloud City Development](https://cloudcity.io)'s ongoing effort to support Ruby open source, I'm proud to announce [the new `params.expect` feature](https://github.com/rails/rails/pull/51674) I recently added to Rails 8.
 
-As part of [Cloud City Development](https://cloudcity.io)'s ongoing effort to support Ruby open source, I'm proud to announce [the new `params.expect` feature](https://github.com/rails/rails/pull/51674) that I added to Rails 8.
-<!--more-->
+## params: a web app attack vector
 
-## Params: An Attack Vector
+All web application programmers learn not to trust user input.
 
-Typically, we protect Rails controller params from user tampering with `params.permit`. This is necessary to prevent users from crafting params that insert attributes or alter behavior, like assigning admin permissions to yourself.
+Rails has long provided a simple pattern to prevent param tampering: `params.permit`. This protects our app from users that may alter params in order to insert attributes or alter behavior, like assigning admin to yourself.
 
 {% highlight ruby %}
   def update
@@ -27,11 +26,13 @@ Typically, we protect Rails controller params from user tampering with `params.p
 
 This works great when users submit a form correctly and even when they try to insert extra fields, like `admin=true` into the params. These attacks get filtered out.
 
-But protecting us from correctly submitted forms and extra attributes is not enough. What if, as we regularly see on RubyGems.org, a user is trying to break your application by submitting malformed params? You will start to see problems.
+But protecting us from correctly submitted forms and extra attributes is not enough. What if, as we regularly see on RubyGems.org, a user is trying to break your application by submitting malformed params? Problems start to emerge.
 
 The solution in Rails 8 is the new `params.expect`.
 
-## How do I use it?
+<!--more-->
+
+## How do I use `params.expect`?
 
 If you don't want to dig into Rails parameter filtering right now, you can simply do the following in Rails 8:
 
@@ -48,7 +49,8 @@ If you don't want to dig into Rails parameter filtering right now, you can simpl
   end
 {% endhighlight %}
 
-When using `expect`, you mirror the structure of the params hash that you expect. The key `:user` will be required and `:name, :favorite_pie` will be permitted.
+When using `params.expect`, mirror the structure of the params hash that you expect.
+In the example above, the key `:user` will be required and the keys `:name, :favorite_pie` will be permitted (as long as they are not arrays or hashes themselves).
 
 The `params.expect` method should, in most cases, fully replace `permit` and `require` in almost all controller code. Unless a param is optional, you probably want to use `expect`.
 
@@ -59,27 +61,29 @@ Additionally, if you expect an array, you need to be explicit about it.
 {% highlight ruby %}
 # allows an Array of favorite_pies, but not an array of users.
 params.expect(user: [ :name, favorite_pies: [[ :flavor ]] ])
-#                        Requires an Array  ^^         ^^
+#     Note the explicit Array format above: ^^         ^^
 {% endhighlight %}
 
 The rest of this post will dig into why and how the new syntax works, how to use it, and some of the gotchas that you might experience with this change.
 
-## Params tampering
+## The Problem of Params Tampering
 
 I briefly alluded to the problem with the old params filtering pattern. What if the users sends this?
 
-`PATCH /user/1?user=hax`
+{% highlight ruby %}
+PATCH /user/1?user=hax
+{% endhighlight %}
 
-The result, using our old code above, is this:
+The result using our old code above is an error:
 
 ```
 NoMethodError in UsersController#update
 undefined method `permit' for an instance of String
 ```
 
-It's not so bad. The filtering did prevent bad input from being interpreted, but it raised a 500 error. That's not great.
+It's not _so_ bad. The filtering did prevent bad input, but it raised a 500 error. Not great.
 
-It probably also got reported to an exception tracking service. Also not great if you're on call.
+It probably also got reported to an exception tracking service. Also not great if you're getting paged.
 
 ### NoMethodError: undefined method 'permit' for instance of String
 
@@ -91,7 +95,7 @@ Now someone is getting paged for a high 500 error rate. 😭
 
 You could change all of your params filtering to be really careful, checking each type in the params chain before calling the next method, but this is tedious and ugly (believe me, I tried. It prompted me to push this fix upstream to Rails.)
 
-## Digging in to `Parameters` internals.
+### Digging into `ActionController::Parameters` internals.
 
 The problem happens because `require` does not, must not, care about what type it is returning. It cannot ensure that an instance of `ActionController::Parameters` is returned whenever one is needed, but return the `String` or `Array` when you want it to. Unfortunately, the user agent sending the request is in control of what type is returned from `require`.
 
