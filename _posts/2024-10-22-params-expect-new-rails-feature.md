@@ -24,7 +24,7 @@ Rails has long provided a simple pattern to prevent param tampering: `params.per
   end
 {% endhighlight %}
 
-This works great when users submit a form correctly and even when they try to insert extra fields, like `admin=true` into the params. These attacks get filtered out.
+This works great when users submit the form correctly and even when they try to insert extra fields, like `admin=true` into the params. These attacks get filtered out.
 
 But protecting us from correctly submitted forms and extra attributes is not enough. What if, as we regularly see on RubyGems.org, a user is trying to break your application by submitting malformed params? Problems start to emerge.
 

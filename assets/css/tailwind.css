@@ -2041,6 +2041,10 @@ video {
   .lg\:max-w-screen-xl {
     max-width: 1280px;
   }
+
+  .lg\:max-w-3xl {
+    max-width: 48rem;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
