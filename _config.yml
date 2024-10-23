@@ -1,0 +1,16 @@
+url: "https://martinemde.com" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "" # the subpath of your site, e.g. /blog
+title: "Martin Emde" # the name of your site, e.g. ACME Corp.
+markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge
+assets:
+  css:
+    main: /assets/css/main.css
+    highlight: /assets/css/highlight.css
+    tailwind: /assets/css/tailwind.css
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - bin
+  - node_modules

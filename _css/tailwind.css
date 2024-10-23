@@ -1,0 +1,15 @@
+@config "../tailwind.config.js";
+@tailwind base;
+
+@layer base {
+  @font-face {
+    font-family: "Overlock", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+}
+
+@tailwind components;
+@tailwind utilities;

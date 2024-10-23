@@ -1,76 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-    <meta content="Martin Emde" name="author">
-    <meta content="width=700" name="viewport">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://martinemde.com/">
-    <meta property="og:title" content="Martin Emde">
-    <meta property="og:description" content="Oh no, you see this when you share the link? Eeek!">
-    <meta property="og:image" content="https://martinemde.com/headshot.jpeg">
-
-    <meta name="twitter:domain" value="martinemde.com">
-    <meta name="twitter:title" value="Martin Emde">
-    <meta name="twitter:description" value="Oh no, you see this when you share the link? Eeek!">
-    <meta name="twitter:image" content="http://martinemed.com/headshot.jpeg">
-    <meta name="twitter:url" value="https://martinemde.com/" />
-    <meta name="twitter:label1" value="GitHub">
-    <meta name="twitter:data1" value="@martinemde">
-    <meta name="twitter:label2" value="Mastadon">
-    <meta name="twitter:data2" value="@martinemde@ruby.social">
-    <title>Martin Emde</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="css/style.css" media="screen" rel="stylesheet" type="text/css">
-  </head>
-  <body>
-    <article class="vcard" itemscope itemtype="http://schema.org/Person">
-      <header class="page-header">
-        <h1 class="fn" itemprop="name">
-          <a class="url" href="http://martinemde.com" itemprop="url" rel="bookmark">
-            <span class="given-name" itemprop="given-name">Martin</span>
-            <span class="family-name" itemprop="family-name">Emde</span>
-          </a>
-        </h1>
-        <p class="email" itemprop="email">
-          <span class="name">me</span><span class="domain">martinemde.com</span>
-        </p>
-        <p>
-          <a href="https://ruby.social/@martinemde" title="I might respond but I rarely use social media.">@martinemde@ruby.social</a>
-        </p>
-        <p class="adr" itemprop="address" itemscope itemtype="http://schema.org/Address">
-          <span class="heart">&lt;3</span> Sierra Nevada foothills in beautiful
-          <span class="locality" itemprop="locality">California</span>
-          <span class="country-name" itemprop="country-name">USA</span>
-        </p>
-      </header>
-      <p>
-        Director of Open Source at <a href="https://rubycentral.org" itemprop="affiliation" rel="external" title="The Ruby community conference and rubygems.org open source maintainer">Ruby Central</a>
-      </p>
-      <p>
-        Maintainer of <a href="https://rubygems.org" rel="external">RubyGems</a> &amp; <a href="https://bundler.io" rel="external">Bundler</a>
-      </p>
-      <p>
-        <abbr title="Programmer">Bounty Hunter</abbr> for hire at <a href="https://cloudcity.io/" itemprop="affiliation" rel="external" title="Where I work.">Cloud City Development</a>
-      </p>
-      <p>
-        Forking at <a href="https://github.com/martinemde" rel="external" title="When I make code, I put it here unless I don't.">github.com/martinemde</a>
-      </p>
-    </article>
-    <script type="text/javascript">
-      //<![CDATA[
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-19274402-1']);
-        _gaq.push(['_setDomainName', '.martinemde.com']);
-        _gaq.push(['_trackPageview']);
-        (function() {
-          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-      //]]>
-    </script>
-  </body>
-</html>
+---
+layout: default
+title: "Martin Emde"
+---
+<article class="mb-10">
+  <h2 class="mt-0">About</h2>
+  <p>
+    I'm a <abbr title="A Software Engineering Consultant, but like since it's Star Wars themed...">Bounty Hunter</abbr> for hire at <a href="https://cloudcity.io/citizens/martin/" itemprop="affiliation" rel="external" title="Where I work.">Cloud City Development</a>
+    and a maintainer of <a href="https://github.com/rubygems/rubygems" rel="external">RubyGems</a>, <a href="https://rubygems.org" rel="external">RubyGems.org</a> &amp; Bundler.
+    Learn more about my work on <a href="https://github.com/martinemde" rel="external" title="When I make code, I put it here unless I don't.">GitHub</a>.
+  </p>
+</article>
+<aside>
+  <h2>Posts</h2>
+  {% for post in site.posts %}
+  <div>
+    <h3><a href="{{ post.url }}" class="no-underline">{{ post.title }}</a></h3>
+    <div>
+      {{ post.excerpt }}
+    </div>
+  </div>
+  {% endfor %}
+</aside>
+<script type="text/javascript">
+  //<![CDATA[
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-19274402-1']);
+    _gaq.push(['_setDomainName', '.martinemde.com']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  //]]>
+</script>

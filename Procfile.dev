@@ -1,0 +1,2 @@
+web: bundle exec jekyll serve --livereload
+tailwind: bundle exec tailwindcss -i _css/tailwind.css -o assets/css/tailwind.css --watch
