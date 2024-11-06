@@ -91,7 +91,7 @@ Not only is an unhandled 500 annoying, but the error raised is extremely generic
 
 Now, in RubyGems.org's case, the hacker sees an unhandled 500, so they try it again. And again. And Again. And Again.
 
-Now someone is getting paged for a high 500 error rate. 😭
+Now someone is definitely getting paged for a high 500 error rate. 😭
 
 You could change all of your params filtering to be really careful, checking each type in the params chain before calling the next method, but this is tedious and ugly (believe me, I tried. It prompted me to push this fix upstream to Rails.)
 
@@ -160,11 +160,11 @@ I discovered a better version when I was trying to solve this problem for RubyGe
 user_params = params.permit(user: [:name, :favorite_pie]).require(:user)
 {% endhighlight %}
 
-The above, or something like it, is what you'll need to do before Rails 8.
+The above, or something like it, is what you'll need to do on versions of Rails before Rails 8.
 
 ## The Array problem
 
-Using `permit` in this less common way shown above is better, but there is a problem with Arrays that is almost just as bad as the problem we were trying to solve in the first place.
+Using `permit` in this less common way shown above is better, but there is a problem with Arrays that is almost as bad as the problem we were trying to solve in the first place.
 
 The `permit` method is more permissive than we would really like. The format `permit(user: [:name, :favorite_pie])` will allow either of the following params:
 
@@ -175,9 +175,9 @@ ActionController::Parameters.new(user: { name: "Martin" })
 ActionController::Parameters.new(user: [ { name: "Martin" } ])
 {% endhighlight %}
 
-When `permit` is given an array as the value, e.g. `[:name]`, it allows either a hash with those keys, or an array of hashes with those keys. This can be inconvenient at best and may even present a security problem if use the params in a particular way.
+When `permit` is given an array as the value, e.g. `[:name]`, it allows either a hash with those keys, or an array of hashes with those keys. This can be inconvenient at best and may pose a security problem if use the params in a particular way.
 
-You can solve this problem, but again his is getting ugly.
+You can solve this problem, but again this is getting ugly.
 
 {% highlight ruby %}
 user_params = user_params.first if user_params.is_a?(Array)
@@ -185,14 +185,14 @@ user_params = user_params.first if user_params.is_a?(Array)
 
 ### A New Syntax for Arrays in `params`
 
-In order to avoid the Array problem, `expect` now _only_ accepts hashes when given the format `[:name]`. If you actually want an Arry, you specify it explicitly with the new (and hopefully not too confusing) format:
+In order to avoid the Array problem, `expect` now _only_ accepts hashes when given the format `[:name]`. If you actually want an Array, specify it explicitly with the new (and hopefully not confusing) format:
 
 {% highlight ruby %}
 # explicit array syntax: a double array
 comments = params.expect(comments: [[:text]])
 {% endhighlight %}
 
-This explicit Array syntax will only allow an Array, and reject with a 400 error any other params structure (like a Hash or String).
+This syntax will only permit an Array and reject, with a 400 error, any other params structure (like a Hash or String).
 
 {% highlight ruby %}
 params = ActionController::Parameters.new(
@@ -202,14 +202,9 @@ params = ActionController::Parameters.new(
     ]
 )
 comments = params.expect(comments: [[:text]])
-<<<<<<< HEAD
-=> { "comments" => [ {"text" => "hello"}, {"text" => "world"} ] }
-
-=======
 # => { "comments" => [ {"text" => "hello"}, {"text" => "world"} ] }
 comments = params.expect(comments: [:text])
 # => ActionController::ParameterMissing
->>>>>>> ceba427 (fixup last example)
 {% endhighlight %}
 
 By resolving this ambiguity in params parsing and improving the syntax and security of features used by every Rails engineer, we are able to reduce false alarms, better protect application data, and maybe reduce the number of engineers getting paged in the middle of the night.
