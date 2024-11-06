@@ -208,8 +208,7 @@ By resolving this ambiguity in params parsing and improving the syntax and secur
 
 Right now I'm committed to improving the Ruby, RubyGems, and Ruby on Rails ecosystems for everyone. The RubyGems.org team, and I "upstream" improvements to the gems we use as a matter of principle. We want Ruby to be the best choice for building applications. We also work closely with other ecosystems like Python and Rust, to ensure best practices across languages.
 
-Are you and your company comfortable being blown around by the winds of open source? To avoid the worst case scenarios, your company needs at least one engineer on your team dedicating their time to open source maintenance. Securing your applications and your developers is a lot like having an IT department to protect your computers.
+Are you and your company comfortable with your reliance on open source? To avoid worst case scenarios, your company needs at least one engineer on your team dedicating their time to open source maintenance.
+If you use Ruby, then you rely on the work of the RubyGems team. I'd love to work with you to help your team suceed in the Ruby ecosystem.
 
-If you use Ruby, then you rely on the work of the RubyGems team. I'd love to work with you to help your team make good on the open source bargain.
-
-If you want to bring us in to work with your team to improve or maintain some of the open source you rely on, could you do better than to employ the world class team at Cloud City Development? With core team members that commit to the most important projects in Ruby, you can feel confident about your usage of open source by retaining Cloud City Development.
+If you would like to work with me and my colleagues to improve or maintain the code you rely on, tald to me at [Cloud City Development](https://cloudcity.io) where you can hire our world class team.
