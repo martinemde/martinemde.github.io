@@ -200,6 +200,10 @@ params = ActionController::Parameters.new(
         {text: "hello"},
         {text: "world"}
     ]
+)
+comments = params.expect(comments: [[:text]])
+=> { "comments" => [ {"text" => "hello"}, {"text" => "world"} ] }
+
 {% endhighlight %}
 
 By resolving this ambiguity in params parsing and improving the syntax and security of features used by every Rails engineer, we are able to reduce false alarms, better protect application data, and maybe reduce the number of engineers getting paged in the middle of the night.
