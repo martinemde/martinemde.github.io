@@ -214,6 +214,6 @@ By resolving this ambiguity in params parsing and improving the syntax and secur
 Right now I'm committed to improving the Ruby, RubyGems, and Ruby on Rails ecosystems for everyone. The RubyGems.org team, and I "upstream" improvements to the gems we use as a matter of principle. We want Ruby to be the best choice for building applications. We also work closely with other ecosystems like Python and Rust, to ensure best practices across languages.
 
 Are you and your company comfortable with your reliance on open source? To avoid worst case scenarios, your company needs at least one engineer on your team dedicating their time to open source maintenance.
-If you use Ruby, then you rely on the work of the RubyGems team. I'd love to work with you to help your team suceed in the Ruby ecosystem.
+If you use Ruby, then you rely on the work of the RubyGems team. I'd love to work with you to help your team succeed in the Ruby ecosystem.
 
-If you would like to work with me and my colleagues to improve or maintain the code you rely on, tald to me at [Cloud City Development](https://cloudcity.io) where you can hire our world class team.
+If you would like to work with me and my colleagues to improve or maintain the code you rely on, connect with me at [Cloud City Development](https://cloudcity.io) where you can hire our world class team.
