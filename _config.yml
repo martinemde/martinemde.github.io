@@ -14,3 +14,6 @@ exclude:
   - Gemfile.lock
   - bin
   - node_modules
+  - tailwind.config.js
+  - README.md
+  - Procfile.dev
