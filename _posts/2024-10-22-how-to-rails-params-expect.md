@@ -68,7 +68,7 @@ The rest of this post will dig into why and how the new syntax works, how to use
 
 ## The Problem of Params Tampering
 
-I briefly alluded to the problem with the old params filtering pattern. What if the users sends this?
+I briefly alluded to the problem with the old params filtering pattern. What if the user sends this?
 
 {% highlight ruby %}
 PATCH /user/1?user=hax
