@@ -16,18 +16,32 @@ The new `expect` method for filtering params protects against user param tamperi
 As a quick review of the feature, when we have code like this:
 
 {% highlight ruby %}
-user_params = params.require(:user).permit(:name, :age)
+user_params = params.require(:user).permit(:name, :handle)
 {% endhighlight %}
 
 We're vulnerable to users calling our action like this:
 
 {% highlight ruby %}
 post "/users", params: { user: "error" }
-user_params = params.require(:user).permit(:name, :age)
+user_params = params.require(:user).permit(:name, :handle)
 # undefined method `permit' for an instance of String
 {% endhighlight %}
 
-By using the new `params.expect` we can prevent this problem (and another I'll discuss again below) all while cleaning up our params handling.
+By using the new `params.expect` we can prevent this problem (and another I'll discuss below) all while cleaning up our params handling.
+
+{% highlight ruby %}
+post "/users", params: { user: "error" }
+user_params = params.expect(user: [:name, :handle])
+# responds as if the required :user key was not sent at all, rendering a 400 error
+{% endhighlight %}
+
+Remember that with valid params, the values at the expected key(s) will be returned, just like with `require`.
+
+{% highlight ruby %}
+post "/users", params: { user: { name: "Martin", handle: "martinemde" }
+user_params = params.expect(user: [:name, :handle])
+# => { name: "Martin", handle: "martinemde" }
+{% endhighlight %}
 
 ## The Easy Part
 
@@ -35,13 +49,13 @@ The conversion follows a consistent pattern.
 
 {% highlight ruby %}
 # Convert code like this:
-user_params = params.require(:user).permit(:name, :age)
+user_params = params.require(:user).permit(:name, :handle)
 # Into the new expect pattern:
-user_params = params.expect(user: [:name, :age])
+user_params = params.expect(user: [:name, :handle])
 {% endhighlight %}
 
 Take the symbol (`:user`) that you put into `require` and instead call `expect` with a hash, using this symbol as the key.
-Move the args you had in `permit` (`:name, :age`) into an array value for your key.
+Move the args you had in `permit` (`:name, :handle`) into an array value for your key.
 In general, the args for `expect` should match the structure of the params you expect in your controller.
 
 You can search and replace for the most basic changes.
@@ -168,7 +182,6 @@ Usually the changes should be this simple. Find single arrays that need to becom
 
 If your application uses the Rails `_json` key, the conversion here always requires an explicit array.
 Rails adds this key to params when JSON is posted with an Array root instead of a Hash.
-
 
 {% highlight ruby %}
 # Before
