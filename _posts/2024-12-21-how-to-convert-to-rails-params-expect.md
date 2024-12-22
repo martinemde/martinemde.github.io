@@ -4,9 +4,8 @@ title:  "How to convert to `params.expect` in Rails 8.0"
 excerpt_separator: <!--more-->
 ---
 
-Today I updated RubyGems.org to use [the new `params.expect` feature](/2024/10/22/how-to-rails-params-expect.html) that I recently added to Rails 8. I ran into some situations that made my first few commits fail the test suite.
-
-Let's go over them so you understand how to fix these situations.
+After updating RubyGems.org to use [the new `params.expect` feature](/2024/10/22/how-to-rails-params-expect.html)
+in Rails 8, I thought it might be helpful to go over a few of the challenges I ran into.
 
 ## Why Should I Convert to `params.expect`?
 
@@ -59,10 +58,9 @@ I suggest converting the simple ones and leaving the complex ones for later.
 After making the easiest changes, search for `permit` and find anything with multi-line or more complicated code.
 
 Once you've converted everything, run your tests. There might be some things that broke
+The most common reason for test failures will probably be the new params array syntax.
 
-The most common reason is going to be the newe explicit array syntax in `params.expect`.
-
-## Missing Explicit Arrays
+## Explicit Arrays
 
 Because `params.expect` requires explicitly declaring expected Arrays, you'll need to fix those manually where they occur.
 This is because `params.permit` did not distinguish between `[:key]` meaning an array of hashes, or a single hash.
