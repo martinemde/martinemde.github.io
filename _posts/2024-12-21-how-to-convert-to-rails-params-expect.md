@@ -8,15 +8,47 @@ Today I updated RubyGems.org to use [the new `params.expect` feature](/2024/10/2
 
 Let's go over them so you understand how to fix these situations.
 
+## Why Should I Convert to `params.expect`?
+
+The new `expect` method for filtering params protects against user param tampering that can cause hard to rescue errors.
+
 <!--more-->
+
+As a quick review of the feature, when we have code like this:
+
+{% highlight ruby %}
+user_params = params.require(:user).permit(:name, :age)
+{% endhighlight %}
+
+We're vulnerable to users calling our action like this:
+
+{% highlight ruby %}
+post "/users", params: { user: "error" }
+user_params = params.require(:user).permit(:name, :age)
+# undefined method `permit' for an instance of String
+{% endhighlight %}
+
+By using the new `params.expect` we can prevent this problem (and another I'll discuss again below) all while cleaning up our params handling.
 
 ## The Easy Part
 
-You can search and replace for the most basic changes.
+The conversion follows a consistent pattern.
 
+{% highlight ruby %}
+# Convert code like this:
+user_params = params.require(:user).permit(:name, :age)
+# Into the new expect pattern:
+user_params = params.expect(user: [:name, :age])
+{% endhighlight %}
+
+Take the symbol (`:user`) that you put into `require` and instead call `expect` with a hash, using this symbol as the key.
+Move the args you had in `permit` (`:name, :age`) into an array value for your key.
+In general, the args for `expect` should match the structure of the params you expect in your controller.
+
+You can search and replace for the most basic changes.
 Use the following find and replace regex as a starting point. However, there will be some cases you can't fix this easily.
 
-If you don't have good test coverage, be careful changing any `permit` that has an array in the args (like `permit(key: [:other, :keys])`).
+**If you don't have good test coverage, be careful changing any `permit` that has an array in the args (like `permit(key: [:other, :keys])`).**
 
 ```
 Find `params.require\(:([^\)]+)\).permit\(([^\)]+)\)`
