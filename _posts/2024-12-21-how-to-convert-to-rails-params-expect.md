@@ -72,9 +72,7 @@ Hopefully your tests will fail with something like this:
 Expected response to be a <2XX: success>, but was a <400: Bad Request>
 ```
 
-Go back and make sure you have test coverage for the usecase and then try again.
-
-Here's an example I ran into today:
+Here's a more complex example I ran into today:
 
 {% highlight ruby %}
 # Original
@@ -165,6 +163,24 @@ params.expect(ownerships: [%i[push owner]])
 {% endhighlight %}
 
 Usually the changes should be this simple. Find single arrays that need to become explicit double arrays.
+
+## Handling `_json` Params
+
+If your application uses the Rails `_json` key, the conversion here always requires an explicit array.
+Rails adds this key to params when JSON is posted with an Array root instead of a Hash.
+
+
+{% highlight ruby %}
+# Before
+array_or_hash = params.require(:_json).permit(:key, :other)
+# After
+always_array = params.expect(_json: [[:key, :other]])
+{% endhighlight %}
+
+
+This new format ensures that you're always receiving an array.
+While this doesn't directly fix vulnerable code, it should make you think more clearly about what params you're expecting.
+This in turn could help mitigate [a potential vulnerability enabled by inexplicit verification of input params](https://nastystereo.com/security/rails-_json-juggling-attack.html).
 
 ## Go Forth and Expect
 
