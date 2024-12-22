@@ -47,38 +47,38 @@ Go back and make sure you have test coverage for the usecase and then try again.
 Here's an example I ran into today:
 
 {% highlight ruby %}
-  # Original
-  params.permit(api_key_role: [
-    :name,
-    :oidc_provider_id,
-    api_key_permissions: [:valid_for, scopes: [], gems: []],
-    access_policy: {
-      statements_attributes: [ # notice the single array here
-        :effect,
-        principal: :oidc,
-        conditions_attributes: %i[operator claim value]
-      ]
-    }
-  ]).require(:api_key_role)
+# Original
+params.permit(api_key_role: [
+  :name,
+  :oidc_provider_id,
+  api_key_permissions: [:valid_for, scopes: [], gems: []],
+  access_policy: {
+    statements_attributes: [ # notice the single array here
+      :effect,
+      principal: :oidc,
+      conditions_attributes: %i[operator claim value]
+    ]
+  }
+]).require(:api_key_role)
 {% endhighlight %}
 
 The problem is that `statements_attributes` should be an array of hashes.
 To require that key to be an array, `params.expect` needs us to wrap the array in second array.
 
 {% highlight ruby %}
-  # Fixed
-  params.expect(api_key_role: [
-    :name,
-    :oidc_provider_id,
-    api_key_permissions: [:valid_for, scopes: [], gems: []], # this doesn't change
-    access_policy: {
-      statements_attributes: [[ # notice the double array change here
-        :effect,
-        principal: :oidc,
-        conditions_attributes: [%i[operator claim value]] # notice the double array here too
-      ]]
-    }
-  ].freeze
+# Fixed
+params.expect(api_key_role: [
+  :name,
+  :oidc_provider_id,
+  api_key_permissions: [:valid_for, scopes: [], gems: []], # this doesn't change
+  access_policy: {
+    statements_attributes: [[ # notice the double array change here
+      :effect,
+      principal: :oidc,
+      conditions_attributes: [%i[operator claim value]] # notice the double array here too
+    ]]
+  }
+].freeze
 {% endhighlight %}
 
 I left a lot of the extra detail here so you can see what does and does not change.
@@ -90,12 +90,12 @@ The fix here is to add a double array for key `statements_attributes` and `condi
 This requires the value to be an array of hashes like the following (simplified, nesting reduced):
 
 {% highlight ruby %}
-  access_policy: {
-    statements_attributes: [
-      { effect: "", principal: { oidc: "" }, conditions_attributes: [ { operator: "", claim: "", value: "" }, ... ] },
-      { ... }
-    ]
-  }
+access_policy: {
+  statements_attributes: [
+    { effect: "", principal: { oidc: "" }, conditions_attributes: [ { operator: "", claim: "", value: "" }, ... ] },
+    { ... }
+  ]
+}
 {% endhighlight %}
 
 ## A Hash of Hashes with IDs for Keys
@@ -104,7 +104,7 @@ The next one stumped me for a bit before I tested it in the Rails console.
 The controller seemed very simple and I thought nothing of it during my search and replace.
 
 {% highlight ruby %}
-  params.expect(ownerships: %i[push owner])
+params.expect(ownerships: %i[push owner])
 {% endhighlight %}
 
 However, our tests failed with the telltale `params.expect` failure:
@@ -116,22 +116,22 @@ Expected response to be a <3XX: redirect>, but was a <400: Bad Request>
 I looked at the form and it sends something like the following, which I put it into the Rails console (`bin/rails c`) to test:
 
 {% highlight ruby %}
-  > params = ActionController::Parameters.new(
-    ownerships: {
-      "123" => { push: "on", owner: "on" },
-      "456" => { push: "off", owner: "off" }
-    }
-  )
-  => #<ActionController::Parameters {"ownerships"=>{"123"=>{"push"=>"on", "owner"=>"on"}, "456"=>{"push"=>...
-  > params.expect(ownerships: [%i[push owner]])
-  => #<ActionController::Parameters {"123"=>#<ActionController::Parameters {"push"=>"on", "owner"=>"on"} permitted: true>, "456"=>#<ActionController::Parameters {"push"=>"off", "owner"=>"off"} permitted: true>} permitted: true>
+> params = ActionController::Parameters.new(
+  ownerships: {
+    "123" => { push: "on", owner: "on" },
+    "456" => { push: "off", owner: "off" }
+  }
+)
+=> #<ActionController::Parameters {"ownerships"=>{"123"=>{"push"=>"on", "owner"=>"on"}, "456"=>{"push"=>...
+> params.expect(ownerships: [%i[push owner]])
+=> #<ActionController::Parameters {"123"=>#<ActionController::Parameters {"push"=>"on", "owner"=>"on"} permitted: true>, "456"=>#<ActionController::Parameters {"push"=>"off", "owner"=>"off"} permitted: true>} permitted: true>
 {% endhighlight %}
 
 I thought this would be tricky, but Rails StrongParameters has rules that treat this like an array.
 The fix is just the same as the others: add a second set of array square brackets.
 
 {% highlight ruby %}
-  params.expect(ownerships: [%i[push owner]])
+params.expect(ownerships: [%i[push owner]])
 {% endhighlight %}
 
 Usually the changes should be this simple. Find single arrays that need to become explicit double arrays.
