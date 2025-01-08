@@ -4,7 +4,9 @@ title:  "How to: Rails `params.expect`"
 excerpt_separator: <!--more-->
 ---
 
-As part of [Cloud City Development](https://cloudcity.io)'s ongoing effort to support Ruby open source, I'm proud to announce [the new `params.expect` feature](https://github.com/rails/rails/pull/51674) recently added to Rails 8.
+In this post I will describe [the new `params.expect` feature](https://github.com/rails/rails/pull/51674) that I recently added to Rails 8 and go over how it works and how to use it.
+
+Update: For an implementation guide, see [my second post on `params.expect`](/2024/12/21/how-to-convert-to-rails-params-expect.html).
 
 ## params: An Attack Vector
 
