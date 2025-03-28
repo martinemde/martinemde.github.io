@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gem "jekyll"
 gem "webrick"
-gem "tailwindcss-ruby", "~> 3.4"
+gem "tailwindcss-ruby", "~> 4.0"
 
 gem "logger", "~> 1.7"
 gem "csv", "~> 3.3"
