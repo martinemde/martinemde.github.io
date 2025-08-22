@@ -1,57 +1,36 @@
 <script lang="ts">
-	import Header from './Header.svelte';
 	import '../app.css';
 
 	let { children } = $props();
 </script>
 
-<div class="app">
-	<Header />
+<div class="min-h-screen bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white">
+	<!-- Header -->
+	<header class="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
+		<div class="container mx-auto px-4">
+			<div class="flex items-center justify-between py-4">
+				<div class="flex items-center">
+					<h1 class="text-xl font-bold text-white">
+						<a href="/" class="hover:opacity-75 transition-opacity">Martin Emde</a>
+					</h1>
+				</div>
+				<nav class="space-x-4">
+					<a href="/blog" class="btn btn-sm variant-ghost-surface text-white hover:bg-white/20">Blog</a>
+					<a href="/about" class="btn btn-sm variant-ghost-surface text-white hover:bg-white/20">About</a>
+				</nav>
+			</div>
+		</div>
+	</header>
 
-	<main>
+	<!-- Main Content -->
+	<main class="container mx-auto px-4 py-8 min-h-screen">
 		{@render children()}
 	</main>
 
-	<footer>
-		<p>
-			visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to learn about SvelteKit
-		</p>
+	<!-- Footer -->
+	<footer class="bg-slate-100 dark:bg-slate-900 py-8">
+		<div class="container mx-auto px-4 text-center text-sm text-slate-600 dark:text-slate-400">
+			<p>&copy; 2024 Martin Emde. All rights reserved.</p>
+		</div>
 	</footer>
 </div>
-
-<style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 64rem;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
-	}
-</style>
