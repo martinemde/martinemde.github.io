@@ -7,15 +7,20 @@
 	<meta name="description" content="Software Engineer Consultant, RubyGems Maintainer" />
 </svelte:head>
 
-<div class="max-w-4xl mx-auto">
+<div class="mx-auto max-w-4xl">
 	<!-- Hero/About Section -->
-	<section class="card variant-filled-surface p-8 mb-8">
+	<section class="card variant-filled-surface mb-8 p-8">
 		<div class="prose prose-lg max-w-none">
 			<p>
-				Software Engineer Consultant at <a href="https://cloudcity.io/" rel="external" class="anchor">Cloud City Development</a>.
-				Maintainer of <a href="https://github.com/rubygems/rubygems" rel="external" class="anchor">RubyGems</a>, 
+				Software Engineer Consultant at <a
+					href="https://cloudcity.io/"
+					rel="external"
+					class="anchor">Cloud City Development</a
+				>. Maintainer of
+				<a href="https://github.com/rubygems/rubygems" rel="external" class="anchor">RubyGems</a>,
 				<a href="https://rubygems.org" rel="external" class="anchor">RubyGems.org</a> &amp; Bundler.
-				Learn more about my work on <a href="https://github.com/martinemde" rel="external" class="anchor">GitHub</a>.
+				Learn more about my work on
+				<a href="https://github.com/martinemde" rel="external" class="anchor">GitHub</a>.
 			</p>
 		</div>
 	</section>
@@ -32,11 +37,14 @@
 						</a>
 					</h3>
 					<p>
-						After updating RubyGems.org to use the new `params.expect` feature in Rails 8, 
-						I thought it might be helpful to go over a few of the challenges I ran into.
+						After updating RubyGems.org to use the new `params.expect` feature in Rails 8, I thought
+						it might be helpful to go over a few of the challenges I ran into.
 					</p>
 					<p class="text-center">
-						<a href="/2024/12/21/how-to-convert-to-rails-params-expect.html" class="btn variant-filled-primary">
+						<a
+							href="/2024/12/21/how-to-convert-to-rails-params-expect.html"
+							class="btn variant-filled-primary"
+						>
 							Continue reading&hellip;
 						</a>
 					</p>
@@ -51,11 +59,14 @@
 						</a>
 					</h3>
 					<p>
-						In this post I will describe the new `params.expect` feature that I recently added to Rails 8 
-						and go over how it works and how to use it.
+						In this post I will describe the new `params.expect` feature that I recently added to
+						Rails 8 and go over how it works and how to use it.
 					</p>
 					<p class="text-center">
-						<a href="/2024/10/22/how-to-rails-params-expect.html" class="btn variant-filled-primary">
+						<a
+							href="/2024/10/22/how-to-rails-params-expect.html"
+							class="btn variant-filled-primary"
+						>
 							Continue reading&hellip;
 						</a>
 					</p>
