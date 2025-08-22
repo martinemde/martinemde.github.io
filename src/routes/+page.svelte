@@ -1,59 +1,66 @@
 <script lang="ts">
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcomeFallback from '$lib/images/svelte-welcome.png';
+	// Home page with author bio and latest posts
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<title>Martin Emde</title>
+	<meta name="description" content="Software Engineer Consultant, RubyGems Maintainer" />
 </svelte:head>
 
-<section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcomeFallback} alt="Welcome" />
-			</picture>
-		</span>
+<div class="max-w-4xl mx-auto">
+	<!-- Hero/About Section -->
+	<section class="card variant-filled-surface p-8 mb-8">
+		<div class="prose prose-lg max-w-none">
+			<p>
+				Software Engineer Consultant at <a href="https://cloudcity.io/" rel="external" class="anchor">Cloud City Development</a>.
+				Maintainer of <a href="https://github.com/rubygems/rubygems" rel="external" class="anchor">RubyGems</a>, 
+				<a href="https://rubygems.org" rel="external" class="anchor">RubyGems.org</a> &amp; Bundler.
+				Learn more about my work on <a href="https://github.com/martinemde" rel="external" class="anchor">GitHub</a>.
+			</p>
+		</div>
+	</section>
 
-		to your new<br />SvelteKit app
-	</h1>
+	<!-- Latest Posts Section -->
+	<section>
+		<h2 class="h2 mb-6">Latest Updates</h2>
+		<div class="space-y-6">
+			<div class="card variant-filled-surface p-8">
+				<div class="prose prose-lg max-w-none">
+					<h3 class="h3">
+						<a href="/2024/12/21/how-to-convert-to-rails-params-expect.html" class="anchor">
+							How to convert to `params.expect` in Rails 8.0
+						</a>
+					</h3>
+					<p>
+						After updating RubyGems.org to use the new `params.expect` feature in Rails 8, 
+						I thought it might be helpful to go over a few of the challenges I ran into.
+					</p>
+					<p class="text-center">
+						<a href="/2024/12/21/how-to-convert-to-rails-params-expect.html" class="btn variant-filled-primary">
+							Continue reading&hellip;
+						</a>
+					</p>
+				</div>
+			</div>
 
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
-	<Counter />
-</section>
-
-<style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
-
-	h1 {
-		width: 100%;
-	}
-
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
-</style>
+			<div class="card variant-filled-surface p-8">
+				<div class="prose prose-lg max-w-none">
+					<h3 class="h3">
+						<a href="/2024/10/22/how-to-rails-params-expect.html" class="anchor">
+							How to: Rails `params.expect`
+						</a>
+					</h3>
+					<p>
+						In this post I will describe the new `params.expect` feature that I recently added to Rails 8 
+						and go over how it works and how to use it.
+					</p>
+					<p class="text-center">
+						<a href="/2024/10/22/how-to-rails-params-expect.html" class="btn variant-filled-primary">
+							Continue reading&hellip;
+						</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

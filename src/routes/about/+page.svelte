@@ -1,26 +1,20 @@
 <svelte:head>
-	<title>About</title>
-	<meta name="description" content="About this app" />
+	<title>About - Martin Emde</title>
+	<meta name="description" content="About Martin Emde" />
 </svelte:head>
 
-<div class="text-column">
-	<h1>About this app</h1>
-
-	<p>
-		This is a <a href="https://svelte.dev/docs/kit">SvelteKit</a> app. You can make your own by typing
-		the following into your command line and following the prompts:
-	</p>
-
-	<pre>npx sv create</pre>
-
-	<p>
-		The page you're looking at is purely static HTML, with no client-side interactivity needed.
-		Because of that, we don't need to load any JavaScript. Try viewing the page's source, or opening
-		the devtools network panel and reloading.
-	</p>
-
-	<p>
-		The <a href="/sverdle">Sverdle</a> page illustrates SvelteKit's data loading and form handling. Try
-		using it with JavaScript disabled!
-	</p>
+<div class="max-w-4xl mx-auto">
+	<div class="card variant-filled-surface p-8">
+		<div class="prose prose-lg max-w-none">
+			<h1>About</h1>
+			<p>
+				Software Engineer Consultant at <a href="https://cloudcity.io/" rel="external" class="anchor">Cloud City Development</a>.
+				Maintainer of <a href="https://github.com/rubygems/rubygems" rel="external" class="anchor">RubyGems</a>, 
+				<a href="https://rubygems.org" rel="external" class="anchor">RubyGems.org</a> &amp; Bundler.
+			</p>
+			<p>
+				Learn more about my work on <a href="https://github.com/martinemde" rel="external" class="anchor">GitHub</a>.
+			</p>
+		</div>
+	</div>
 </div>
