@@ -51,7 +51,31 @@ The URL will automatically be generated as `/YYYY/MM/DD/title.html` to preserve 
 
 ## Deployment
 
-The site is automatically deployed to GitHub Pages via GitHub Actions when changes are pushed to the `main` branch.
+The site is automatically deployed to Cloudflare Workers via GitHub Actions when changes are pushed to the `main` branch.
+
+### Setup for Deployment
+
+To deploy to Cloudflare Workers, you need to set up the following repository secret:
+
+- `CLOUDFLARE_API_TOKEN`: Your Cloudflare API token with permissions to edit Workers
+
+### Local Deployment
+
+You can also deploy locally using wrangler:
+
+```bash
+# Install dependencies
+npm install
+
+# Build the site
+npm run build
+
+# Deploy to Cloudflare Workers
+npm run deploy
+
+# Preview deployment (dry run)
+npm run deploy:preview
+```
 
 ## Migration from Jekyll
 
