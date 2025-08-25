@@ -1,0 +1,21 @@
+{
+  "name": "martinemde-blog",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/tailwind": "^5.1.2",
+    "@tailwindcss/typography": "^0.5.15",
+    "astro": "^4.16.18",
+    "tailwindcss": "^3.4.16"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.10"
+  }
+}

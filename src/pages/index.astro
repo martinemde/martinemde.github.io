@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Get all blog posts and sort by date (most recent first)
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) => {
+  const dateA = new Date(a.id.substring(0, 10));
+  const dateB = new Date(b.id.substring(0, 10));
+  return dateB.getTime() - dateA.getTime();
+});
+
+// Function to extract excerpt from content
+function extractExcerpt(content: string, limit = 150): string {
+  // Remove frontmatter and markdown formatting
+  const cleanContent = content
+    .replace(/^---[\s\S]*?---/, '') // Remove frontmatter
+    .replace(/^#+\s*/gm, '') // Remove headers
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Convert links to text
+    .replace(/`([^`]+)`/g, '$1') // Remove code backticks
+    .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold
+    .replace(/\*([^*]+)\*/g, '$1') // Remove italic
+    .trim();
+  
+  // Get first paragraph or sentence
+  const sentences = cleanContent.split(/[.!?]\s+/);
+  let excerpt = sentences[0];
+  
+  if (excerpt.length < limit && sentences.length > 1) {
+    excerpt = sentences.slice(0, 2).join('. ') + '.';
+  }
+  
+  if (excerpt.length > limit) {
+    excerpt = excerpt.substring(0, limit).trim() + '...';
+  }
+  
+  return excerpt;
+}
+---
+
+<Layout title="Martin Emde">
+  <article class="py-8 px-10 bg-white dark:bg-slate-950 rounded-lg mb-10 shadow-lg">
+    <div class="prose prose-lg prose-slate dark:prose-invert">
+      <!-- <h2 class="mt-0">About</h2> -->
+      <p>
+        Software Engineer Consultant at <a href="https://cloudcity.io/" itemprop="affiliation" rel="external" title="Where I work.">Cloud City Development</a>.
+        Maintainer of <a href="https://github.com/rubygems/rubygems" rel="external">RubyGems</a>, <a href="https://rubygems.org" rel="external">RubyGems.org</a> &amp; Bundler.
+        Learn more about my work on <a href="https://github.com/martinemde" rel="external" title="When I make code, I put it here unless I don't.">GitHub</a>.
+      </p>
+    </div>
+  </article>
+  <aside>
+    <h2 class="text-2xl font-semibold mb-6 px-10">Latest Updates</h2>
+    {sortedPosts.map(async (post) => {
+      const date = post.id.substring(0, 10);
+      const slug = post.id.substring(11).replace('.md', '');
+      const url = `/${date.replace(/-/g, '/')}/${slug}.html`;
+      const { body } = await post.render();
+      const excerpt = extractExcerpt(post.body);
+      
+      return (
+        <div class="pt-8 pb-14 px-10 bg-white dark:bg-slate-950 rounded-lg mb-10 shadow-lg">
+          <div class="prose md:prose-md prose-slate dark:prose-invert">
+            <h2><a href={url} class="no-underline">{post.data.title}</a></h2>
+            <div>
+              <p>{excerpt}</p>
+            </div>
+            <p class="text-center"><a href={url} class="no-underline hover:underline hover:text-indigo-800">Continue reading&hellip;</a></p>
+          </div>
+        </div>
+      );
+    })}
+  </aside>
+</Layout>

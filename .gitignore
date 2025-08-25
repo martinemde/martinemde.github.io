@@ -1,5 +1,24 @@
+# Build outputs
 _site/
+dist/
+.output/
+
+# Generated files
+.astro/
+
+# Dependencies
+node_modules/
+
+# Jekyll cache
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata
-node_modules
+
+# Environment variables
+.env
+.env.production
+.env.local
+.env.production.local
+
+# macOS-specific files
+.DS_Store
