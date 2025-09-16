@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 export interface Props {
   title: string;
 }
@@ -14,22 +16,23 @@ const { title } = Astro.props;
     <title>{title} - Martin Emde</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Overlock:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/highlight.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-stone-100 dark:bg-slate-800 text-slate-900 dark:text-white">
-    <div class="min-h-screen flex flex-col">
-      <header class="flex flex-row w-full max-w-3xl mx-auto px-8 py-8 justify-between items-center">
-        <h1 class="flex text-4xl font-bold">
-          <a href="/">Martin Emde</a>
-        </h1>
-        <nav class="flex text-lg">
-          <ul class="flex space-x-4">
-            <li><a href="/" class="no-underline">About</a></li>
-          </ul>
-        </nav>
+  <body class="bg-gray-50 text-gray-900 antialiased">
+    <div class="min-h-screen">
+      <header class="border-b border-gray-200 bg-white">
+        <div class="max-w-4xl mx-auto px-6 py-8">
+          <div class="flex items-center justify-between">
+            <h1 class="text-2xl font-semibold">
+              <a href="/" class="text-gray-900 hover:text-gray-700 transition-colors">Martin Emde</a>
+            </h1>
+            <nav>
+              <a href="/" class="text-gray-600 hover:text-gray-900 transition-colors">About</a>
+            </nav>
+          </div>
+        </div>
       </header>
-      <main class="max-w-full lg:max-w-3xl mx-auto md:px-8 mb-20">
+      <main class="max-w-4xl mx-auto px-6 py-12">
         <slot />
       </main>
     </div>

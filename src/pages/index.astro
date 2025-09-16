@@ -39,36 +39,40 @@ function extractExcerpt(content: string, limit = 150): string {
 ---
 
 <Layout title="Martin Emde">
-  <article class="py-8 px-10 bg-white dark:bg-slate-950 rounded-lg mb-10 shadow-lg">
-    <div class="prose prose-lg prose-slate dark:prose-invert">
-      <!-- <h2 class="mt-0">About</h2> -->
-      <p>
+  <!-- About Section -->
+  <section class="bg-white rounded-lg border border-gray-200 p-8 shadow-sm mb-12">
+    <div class="prose prose-gray max-w-none prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline">
+      <p class="text-lg text-gray-700 leading-relaxed">
         Software Engineer Consultant at <a href="https://cloudcity.io/" itemprop="affiliation" rel="external" title="Where I work.">Cloud City Development</a>.
         Maintainer of <a href="https://github.com/rubygems/rubygems" rel="external">RubyGems</a>, <a href="https://rubygems.org" rel="external">RubyGems.org</a> &amp; Bundler.
         Learn more about my work on <a href="https://github.com/martinemde" rel="external" title="When I make code, I put it here unless I don't.">GitHub</a>.
       </p>
     </div>
-  </article>
-  <aside>
-    <h2 class="text-2xl font-semibold mb-6 px-10">Latest Updates</h2>
-    {sortedPosts.map(async (post) => {
-      const date = post.id.substring(0, 10);
-      const slug = post.id.substring(11).replace('.md', '');
-      const url = `/${date.replace(/-/g, '/')}/${slug}.html`;
-      const { body } = await post.render();
-      const excerpt = extractExcerpt(post.body);
-      
-      return (
-        <div class="pt-8 pb-14 px-10 bg-white dark:bg-slate-950 rounded-lg mb-10 shadow-lg">
-          <div class="prose md:prose-md prose-slate dark:prose-invert">
-            <h2><a href={url} class="no-underline">{post.data.title}</a></h2>
-            <div>
-              <p>{excerpt}</p>
-            </div>
-            <p class="text-center"><a href={url} class="no-underline hover:underline hover:text-indigo-800">Continue reading&hellip;</a></p>
-          </div>
-        </div>
-      );
-    })}
-  </aside>
+  </section>
+
+  <!-- Blog Posts Section -->
+  <section>
+    <h2 class="text-2xl font-semibold text-gray-900 mb-8">Latest Updates</h2>
+    <div class="space-y-8">
+      {sortedPosts.map(async (post) => {
+        const date = post.id.substring(0, 10);
+        const slug = post.id.substring(11).replace('.md', '');
+        const url = `/${date.replace(/-/g, '/')}/${slug}.html`;
+        const { body } = await post.render();
+        const excerpt = extractExcerpt(post.body);
+        
+        return (
+          <article class="bg-white rounded-lg border border-gray-200 p-8 shadow-sm hover:shadow-md transition-shadow">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">
+              <a href={url} class="text-gray-900 hover:text-blue-600 transition-colors">{post.data.title}</a>
+            </h3>
+            <p class="text-gray-600 leading-relaxed mb-4">{excerpt}</p>
+            <a href={url} class="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors font-medium">
+              Continue reading →
+            </a>
+          </article>
+        );
+      })}
+    </div>
+  </section>
 </Layout>

@@ -11,7 +11,11 @@ export default {
     '*.md'
   ],
   theme: {
-      extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/typography'),
