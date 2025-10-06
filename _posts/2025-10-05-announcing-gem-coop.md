@@ -6,7 +6,7 @@ excerpt_separator: <!--more-->
 
 _don't put all your gems in one basket_
 
-The team from rubygems.org is excited to announce a new gem server for the Ruby community:
+The former team from rubygems.org is excited to announce a new gem server for the Ruby community:
 
 [https://gem.coop](https://gem.coop)
 
