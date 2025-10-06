@@ -12,7 +12,7 @@ The team from rubygems.org is excited to announce a new gem server for the Ruby 
 
 Right now, the current versions of RubyGems and Bundler work with this new server. All Ruby developers are welcome to switch to using this new server immediately. Just swap your primary source to `https://gem.coop`
 
-The gem.coop server is simple and we aim to keep it that way. We plan to add features that serve to increase security and make packing blazing fast. We want the default choice to be the secure choice.
+The gem.coop server is simple and we aim to keep it that way. We plan to add features that serve to increase security and make packaging blazing fast. We want the default choice to be the secure choice.
 
 ## Join us!
 
