@@ -1,21 +1,17 @@
 ---
-title: "How to: Rails `params.expect`"
+title: 'How to: Rails `params.expect`'
 date: 2024-10-22
-description: "A guide to the new params.expect feature in Rails 8"
+author: Martin Emde
+description: 'A guide to the new params.expect feature in Rails 8'
+published: true
+slug: how-to-rails-params-expect
 ---
-
-<svelte:head>
-  <title>How to: Rails `params.expect` - Martin Emde</title>
-  <meta name="description" content="A guide to the new params.expect feature in Rails 8" />
-</svelte:head>
-
-<div class="prose prose-lg max-w-none">
 
 # How to: Rails `params.expect`
 
 In this post I will describe [the new `params.expect` feature](https://github.com/rails/rails/pull/51674) that I recently added to Rails 8 and go over how it works and how to use it.
 
-Update: For an implementation guide, see [my second post on `params.expect`](/2024/12/21/how-to-convert-to-rails-params-expect.html).
+Update: For an implementation guide, see [my second post on `params.expect`](/blog/how-to-convert-to-rails-params-expect).
 
 ## params: An Attack Vector
 
@@ -109,7 +105,7 @@ Here's what can happen with the traditional Rails approach when params are tampe
 class UsersController < ApplicationController
   def update
     user_params = params.require(:user).permit(:name, :favorite_pie)
-    
+
     if @user.update(user_params)
       redirect_to @user
     else
@@ -192,5 +188,3 @@ Are you and your company comfortable with your reliance on open source? To avoid
 If you use Ruby, then you rely on the work of the RubyGems team. I'd love to work with you to help your team succeed in the Ruby ecosystem.
 
 If you would like to work with me and my colleagues to improve or maintain the code you rely on, connect with me at [Cloud City Development](https://cloudcity.io) where you can hire our world class team.
-
-</div>
