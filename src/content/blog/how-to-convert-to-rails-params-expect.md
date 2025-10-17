@@ -1,19 +1,15 @@
 ---
-title: "How to convert to `params.expect` in Rails 8.0"
+title: 'How to convert to `params.expect` in Rails 8.0'
 date: 2024-12-21
-description: "A practical guide to converting existing Rails controllers to use params.expect"
+author: Martin Emde
+description: 'A practical guide to converting existing Rails controllers to use params.expect'
+published: true
+slug: how-to-convert-to-rails-params-expect
 ---
-
-<svelte:head>
-  <title>How to convert to `params.expect` in Rails 8.0 - Martin Emde</title>
-  <meta name="description" content="A practical guide to converting existing Rails controllers to use params.expect" />
-</svelte:head>
-
-<div class="prose prose-lg max-w-none">
 
 # How to convert to `params.expect` in Rails 8.0
 
-After updating RubyGems.org to use [the new `params.expect` feature](/2024/10/22/how-to-rails-params-expect.html)
+After updating RubyGems.org to use [the new `params.expect` feature](/blog/how-to-rails-params-expect)
 in Rails 8, I thought it might be helpful to go over a few of the challenges I ran into.
 
 ## Why Should I Convert to `params.expect`?
@@ -81,7 +77,7 @@ The challenge comes when you have conditional or complex parameter handling, esp
 user_params = params.require(:user).permit(:name, :handle)
 user_params[:admin] = true if current_user.admin?
 
-# OR 
+# OR
 
 # OLD: Multiple permit calls
 base_params = params.require(:user).permit(:name, :handle)
@@ -141,7 +137,7 @@ end
 def user_params_with_conditional_admin
   base_params = params.expect(user: [:name, :handle])
   return base_params unless current_user.admin?
-  
+
   admin_params = params.expect(user: [:admin])
   base_params.merge(admin_params)
 end
@@ -158,7 +154,7 @@ test "handles tampered user param as string" do
   assert_response :bad_request
 end
 
-test "handles tampered user param as array" do  
+test "handles tampered user param as array" do
   post users_path, params: { user: ["tampered"] }
   assert_response :bad_request
 end
@@ -191,5 +187,3 @@ When I converted RubyGems.org to use `params.expect`, I found that:
 Converting to `params.expect` improves security and code clarity. Start with the simple cases, and don't be afraid to use conditional logic or helper methods for complex parameter handling.
 
 The key is to think about your parameter structure upfront and declare it explicitly rather than building it up incrementally.
-
-</div>

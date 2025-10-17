@@ -32,7 +32,7 @@
 			<div class="card variant-filled-surface p-8">
 				<div class="prose prose-lg max-w-none">
 					<h3 class="h3">
-						<a href="/2024/12/21/how-to-convert-to-rails-params-expect.html" class="anchor">
+						<a href="/blog/how-to-convert-to-rails-params-expect" class="anchor">
 							How to convert to `params.expect` in Rails 8.0
 						</a>
 					</h3>
@@ -42,7 +42,7 @@
 					</p>
 					<p class="text-center">
 						<a
-							href="/2024/12/21/how-to-convert-to-rails-params-expect.html"
+							href="/blog/how-to-convert-to-rails-params-expect"
 							class="btn variant-filled-primary"
 						>
 							Continue reading&hellip;
@@ -54,7 +54,7 @@
 			<div class="card variant-filled-surface p-8">
 				<div class="prose prose-lg max-w-none">
 					<h3 class="h3">
-						<a href="/2024/10/22/how-to-rails-params-expect.html" class="anchor">
+						<a href="/blog/how-to-rails-params-expect" class="anchor">
 							How to: Rails `params.expect`
 						</a>
 					</h3>
@@ -63,10 +63,7 @@
 						Rails 8 and go over how it works and how to use it.
 					</p>
 					<p class="text-center">
-						<a
-							href="/2024/10/22/how-to-rails-params-expect.html"
-							class="btn variant-filled-primary"
-						>
+						<a href="/blog/how-to-rails-params-expect" class="btn variant-filled-primary">
 							Continue reading&hellip;
 						</a>
 					</p>
