@@ -1,0 +1,24 @@
+{
+  "name": "martinemde-blog",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "deploy": "wrangler deploy",
+    "deploy:preview": "wrangler deploy --dry-run"
+  },
+  "dependencies": {
+    "@astrojs/tailwind": "^5.1.2",
+    "@tailwindcss/typography": "^0.5.15",
+    "astro": "^4.16.18",
+    "tailwindcss": "^3.4.16"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.10",
+    "wrangler": "^3.94.0"
+  }
+}

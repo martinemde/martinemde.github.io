@@ -1,0 +1,11 @@
+{
+	"name": "martinemde-com",
+	"account_id": "9c275e0c035e53370143e8cf240dfb3f",
+	"assets": {
+      "directory": "./dist"
+   },
+	"build": {
+		"command": "npm run build"
+	},
+	"compatibility_date": "2024-12-21"
+}

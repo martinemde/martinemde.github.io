@@ -1,0 +1,11 @@
+---
+import { getEntry } from 'astro:content';
+import BlogPost from '../../../../layouts/BlogPost.astro';
+
+const entry = await getEntry('blog', '2024-12-21-how-to-convert-to-rails-params-expect');
+const { Content } = await entry.render();
+---
+
+<BlogPost title={entry.data.title}>
+  <Content />
+</BlogPost>
