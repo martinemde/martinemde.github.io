@@ -45,7 +45,7 @@ We're facing a profound shift in who is capable of what, and we're going to need
 
 ## We've Been Here Before
                                                                                     
-Engineers faced a similar crossroads years ago. Dan McKinley captured it perfectly in his ["Egoless Engineering"](https://egoless.engineeriang/) talk.                                                                                                                                    t
+Engineers faced a similar crossroads years ago. Dan McKinley captured it perfectly in his ["Egoless Engineering"](https://egoless.engineeriang/) talk.
 
 He describes a designer who was encouraged to contribute to an application and accidentally broke the build late at night. The team had a choice: lock it down so only "real engineers" could deploy, or make deploys safe for everyone.
 
