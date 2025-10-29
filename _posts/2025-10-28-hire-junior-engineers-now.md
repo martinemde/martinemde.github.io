@@ -4,7 +4,7 @@ title:  "We Need Junior Engineers Now More Than Ever"
 excerpt_separator: <!--more-->
 ---
 
-I recently watched something remarkable happen at my company. A domain expert, someone with deep knowledge in their field but zero traditional programming experience, built a useful tool using Cursor. They understood the problem intimately, they knew exactly what needed to be solved, and within hours they had a working prototype.
+I recently watched something remarkable happen at my company. A domain expert, someone with deep knowledge in their field but zero traditional programming experience, built a useful tool using Cursor. They understood their pain points, knew what they wanted to create, and worked with cursor until it solved their problem.
 
 This is the promise of AI-assisted coding, and it's genuinely exciting.
 
