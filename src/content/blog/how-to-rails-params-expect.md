@@ -7,8 +7,6 @@ published: true
 slug: how-to-rails-params-expect
 ---
 
-# How to: Rails `params.expect`
-
 In this post I will describe [the new `params.expect` feature](https://github.com/rails/rails/pull/51674) that I recently added to Rails 8 and go over how it works and how to use it.
 
 Update: For an implementation guide, see [my second post on `params.expect`](/blog/how-to-convert-to-rails-params-expect).

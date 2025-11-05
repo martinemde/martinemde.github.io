@@ -7,8 +7,6 @@ published: true
 slug: announcing-gem-coop
 ---
 
-# Announcing The Gem Cooperative
-
 _don't put all your gems in one basket_
 
 The former team from rubygems.org is excited to announce a new gem server for the Ruby community:
@@ -19,7 +17,7 @@ Right now, the current versions of RubyGems and Bundler work with this new serve
 
 The gem.coop server is simple and we aim to keep it that way. We plan to add features that serve to increase security and make packaging blazing fast. We want the default choice to be the secure choice.
 
-## Join us!
+## Join us
 
 You can [join us on the Bundler Slack](https://join.slack.com/t/bundler/shared_invite/zt-3ey89pd2b-gM4LAB8Xr921Ki_SEKAx4w) to get involved in the discussion.
 

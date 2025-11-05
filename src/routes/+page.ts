@@ -1,3 +1,14 @@
-// since there's no dynamic data here, we can prerender
-// it so that it gets served as a static asset in production
+import type { PageLoad } from './$types';
+import { getRecentPosts } from '$lib/utils/posts';
+
+// Prerender the page at build time with the latest posts
 export const prerender = true;
+
+export const load: PageLoad = async () => {
+  // Load the 2 most recent blog posts for the homepage
+  const recentPosts = await getRecentPosts(2);
+
+  return {
+    recentPosts
+  };
+};

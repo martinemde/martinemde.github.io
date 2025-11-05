@@ -30,7 +30,7 @@
     <div
       class="container mx-auto max-w-4xl px-4 text-center text-sm text-gray-600 dark:text-gray-400"
     >
-      <p>&copy; 2024 Martin Emde. All rights reserved.</p>
+      <p>&copy; 2025 Martin Emde. All rights reserved.</p>
     </div>
   </footer>
 </div>

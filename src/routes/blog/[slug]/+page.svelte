@@ -11,13 +11,13 @@
   {/if}
 </svelte:head>
 
-<article class="mx-auto max-w-4xl">
-  <header class="mb-8">
+<article>
+  <header class="mb-8 border-b border-gray-200 pb-8 dark:border-gray-800">
     {#if data.metadata.title}
-      <h1 class="h1 mb-4">{data.metadata.title}</h1>
+      <h1 class="mb-4 text-4xl font-bold">{data.metadata.title}</h1>
     {/if}
     {#if data.metadata.date}
-      <div class="text-surface-500 mb-4">
+      <div class="text-sm text-gray-600 dark:text-gray-400">
         {new Date(data.metadata.date).toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'long',
@@ -27,7 +27,7 @@
     {/if}
   </header>
 
-  <div class="prose prose-lg max-w-none">
+  <div class="prose prose-lg max-w-none dark:prose-invert">
     <data.content />
   </div>
 </article>

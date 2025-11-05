@@ -7,8 +7,6 @@ published: true
 slug: hire-junior-engineers-now
 ---
 
-# We Need Junior Engineers Now More Than Ever
-
 I recently saw a profound thing happen in my company because of AI coding tools.
 
 A person with zero engineering experience, but with deep knowledge in their field, built a useful tool using Cursor. That's not the story though. We all know that's happening everywhere right now.
