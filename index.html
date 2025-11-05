@@ -2,25 +2,11 @@
 layout: default
 title: "Martin Emde"
 ---
-<article class="py-8 px-10 bg-white dark:bg-slate-950 rounded-lg mb-10 shadow-lg">
-  <div class="prose prose-lg prose-slate dark:prose-invert">
+<article class="prose prose-lg prose-slate dark:prose-invert">
     <!-- <h2 class="mt-0">About</h2> -->
-    <p>
-      Learn more about my work on <a href="https://github.com/martinemde" rel="external" title="When I make code, I put it here unless I don't.">GitHub</a>.
-    </p>
-  </div>
-</article>
-<aside>
-  <h2 class="text-2xl font-semibold mb-6 px-10">Latest Updates</h2>
+  <p>Find me on <a href="https://github.com/martinemde" rel="external" title="When I make code, I put it here unless I don't.">GitHub</a>. </p>
+  <h2>Latest Updates</h2>
   {% for post in site.posts %}
-    <div class="pt-8 pb-14 px-10 bg-white dark:bg-slate-950 rounded-lg mb-10 shadow-lg">
-      <div class="prose md:prose-md prose-slate dark:prose-invert">
-        <h2><a href="{{ post.url }}" class="no-underline">{{ post.title }}</a></h2>
-        <div>
-          {{ post.excerpt }}
-        </div>
-          <p class="text-center"><a href="{{ post.url }}" class="no-underline hover:underline hover:text-indigo-800">Continue reading&hellip;</a></p>
-      </div>
-    </div>
+    <p><a href="{{ post.url }}" class="no-underline">{{ post.title }}</a></p>
   {% endfor %}
-</aside>
+</article>
