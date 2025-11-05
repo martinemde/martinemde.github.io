@@ -1,22 +1,23 @@
 import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import fs from 'fs';
-import path from 'path';
+
+// Import all blog posts at build time using Vite's glob import
+const posts = import.meta.glob('/src/content/blog/*.{md,svx}', {
+	query: '?raw',
+	import: 'default',
+	eager: true
+});
 
 export const GET: RequestHandler = async ({ params }) => {
 	const { slug } = params;
 
-	// Try both .md and .svx extensions
-	const mdPath = path.join(process.cwd(), 'src', 'content', 'blog', `${slug}.md`);
-	const svxPath = path.join(process.cwd(), 'src', 'content', 'blog', `${slug}.svx`);
+	// Try to find the post with this slug
+	const mdKey = `/src/content/blog/${slug}.md`;
+	const svxKey = `/src/content/blog/${slug}.svx`;
 
-	let content: string;
+	const content = (posts[mdKey] || posts[svxKey]) as string | undefined;
 
-	if (fs.existsSync(mdPath)) {
-		content = fs.readFileSync(mdPath, 'utf-8');
-	} else if (fs.existsSync(svxPath)) {
-		content = fs.readFileSync(svxPath, 'utf-8');
-	} else {
+	if (!content) {
 		throw error(404, `Post not found: ${slug}`);
 	}
 
