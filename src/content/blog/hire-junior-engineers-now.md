@@ -84,7 +84,7 @@ Engineering is going to spread out into the entire organization, starting with d
 
 ## Domain Experts Are The New Junior Engineers
 
-Here's what this pairing actually looks like in practice: imagine a junior to mid-level  engineer sitting with a domain expert who's building a tool. The engineer isn't taking over, they're teaching how to think about programming. They're helping refine prompts and explaining software structure. They're helping the domain export to understand the shape of an application.
+Here's what this pairing actually looks like in practice: imagine a junior to mid-level engineer sitting with a domain expert who's building a tool. The engineer isn't taking over, they're teaching how to think about programming. They're helping refine prompts and explaining software structure. They're helping the domain export to understand the shape of an application.
 
 These vibe-support engineers need to be teachers. They need to resist the urge to say "let me just fix this for you" and instead pair with domain experts to learn they domain while they share their understanding of code. The goal isn't only to build the feature, it's to help the domain expert become more capable with each iteration.
 

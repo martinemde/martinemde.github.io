@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>How to convert to `params.expect` in Rails 8.0 - Martin Emde</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Overlock:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/css/tailwind.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/highlight.css">
+  </head>
+  <body class="bg-stone-100 dark:bg-slate-800 text-slate-900 dark:text-white">
+    <div class="min-h-screen flex flex-col">
+      <header class="flex flex-row w-full max-w-3xl mx-auto px-8 py-8 justify-between items-center">
+        <h1 class="flex text-4xl font-bold">
+          <a href="/">Martin Emde</a>
+        </h1>
+        <nav class="flex text-lg">
+          <ul class="flex space-x-4">
+            <li><a href="/" class="no-underline">About</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main class="max-w-full lg:max-w-3xl mx-auto md:px-8 mb-20">
+        
+<div class="pt-14 pb-20 px-10 bg-white dark:bg-slate-950 md:rounded-lg mb-20 shadow-lg">
+  <article class="prose md:prose-md prose-slate dark:prose-invert">
+    <h1>How to convert to `params.expect` in Rails 8.0</h1>
+    <p>After updating RubyGems.org to use <a href="/2024/10/22/how-to-rails-params-expect.html">the new <code class="language-plaintext highlighter-rouge">params.expect</code> feature</a>
+in Rails 8, I thought it might be helpful to go over a few of the challenges I ran into.</p>
+
+<h2 id="why-should-i-convert-to-paramsexpect">Why Should I Convert to <code class="language-plaintext highlighter-rouge">params.expect</code>?</h2>
+
+<p>The new <code class="language-plaintext highlighter-rouge">expect</code> method for filtering params protects against user param tampering that can cause hard to rescue errors.</p>
+
+<!--more-->
+
+<p>As a quick review of the feature, when we have code like this:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">user_params</span> <span class="o">=</span> <span class="n">params</span><span class="p">.</span><span class="nf">require</span><span class="p">(</span><span class="ss">:user</span><span class="p">).</span><span class="nf">permit</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:handle</span><span class="p">)</span></code></pre></figure>
+
+<p>We’re vulnerable to users calling our action like this:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">post</span> <span class="s2">"/users"</span><span class="p">,</span> <span class="ss">params: </span><span class="p">{</span> <span class="ss">user: </span><span class="s2">"error"</span> <span class="p">}</span>
+<span class="n">user_params</span> <span class="o">=</span> <span class="n">params</span><span class="p">.</span><span class="nf">require</span><span class="p">(</span><span class="ss">:user</span><span class="p">).</span><span class="nf">permit</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:handle</span><span class="p">)</span>
+<span class="c1"># undefined method `permit' for an instance of String</span></code></pre></figure>
+
+<p>By using the new <code class="language-plaintext highlighter-rouge">params.expect</code> we can prevent this problem (and another I’ll discuss below) all while cleaning up our params handling.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">post</span> <span class="s2">"/users"</span><span class="p">,</span> <span class="ss">params: </span><span class="p">{</span> <span class="ss">user: </span><span class="s2">"error"</span> <span class="p">}</span>
+<span class="n">user_params</span> <span class="o">=</span> <span class="n">params</span><span class="p">.</span><span class="nf">expect</span><span class="p">(</span><span class="ss">user: </span><span class="p">[</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:handle</span><span class="p">])</span>
+<span class="c1"># responds as if the required :user key was not sent at all, rendering a 400 error</span></code></pre></figure>
+
+<p>Remember that with valid params, the values at the expected key(s) will be returned, just like with <code class="language-plaintext highlighter-rouge">require</code>.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">post</span> <span class="s2">"/users"</span><span class="p">,</span> <span class="ss">params: </span><span class="p">{</span> <span class="ss">user: </span><span class="p">{</span> <span class="ss">name: </span><span class="s2">"Martin"</span><span class="p">,</span> <span class="ss">handle: </span><span class="s2">"martinemde"</span> <span class="p">}</span>
+<span class="n">user_params</span> <span class="o">=</span> <span class="n">params</span><span class="p">.</span><span class="nf">expect</span><span class="p">(</span><span class="ss">user: </span><span class="p">[</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:handle</span><span class="p">])</span>
+<span class="c1"># =&gt; { name: "Martin", handle: "martinemde" }</span></code></pre></figure>
+
+<h2 id="the-easy-part">The Easy Part</h2>
+
+<p>The conversion follows a consistent pattern.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># Convert code like this:</span>
+<span class="n">user_params</span> <span class="o">=</span> <span class="n">params</span><span class="p">.</span><span class="nf">require</span><span class="p">(</span><span class="ss">:user</span><span class="p">).</span><span class="nf">permit</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:handle</span><span class="p">)</span>
+<span class="c1"># Into the new expect pattern:</span>
+<span class="n">user_params</span> <span class="o">=</span> <span class="n">params</span><span class="p">.</span><span class="nf">expect</span><span class="p">(</span><span class="ss">user: </span><span class="p">[</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:handle</span><span class="p">])</span></code></pre></figure>
+
+<p>Take the symbol (<code class="language-plaintext highlighter-rouge">:user</code>) that you put into <code class="language-plaintext highlighter-rouge">require</code> and instead call <code class="language-plaintext highlighter-rouge">expect</code> with a hash, using this symbol as the key.
+Move the args you had in <code class="language-plaintext highlighter-rouge">permit</code> (<code class="language-plaintext highlighter-rouge">:name, :handle</code>) into an array value for your key.
+In general, the args for <code class="language-plaintext highlighter-rouge">expect</code> should match the structure of the params you expect in your controller.</p>
+
+<p>You can search and replace for the most basic changes.
+Use the following find and replace regex as a starting point. However, there will be some cases you can’t fix this easily.</p>
+
+<p><strong>If you don’t have good test coverage, be careful changing any <code class="language-plaintext highlighter-rouge">permit</code> that has an array in the args (like <code class="language-plaintext highlighter-rouge">permit(key: [:other, :keys])</code>).</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Find `params.require\(:([^\)]+)\).permit\(([^\)]+)\)`
+Replace `params.expect($1: [$2])`
+</code></pre></div></div>
+
+<p>I suggest converting the simple ones and leaving the complex ones for later.
+After making the easiest changes, search for <code class="language-plaintext highlighter-rouge">permit</code> and find anything with multi-line or more complicated code.</p>
+
+<p>Once you’ve converted everything, run your tests. There might be some things that broke
+The most common reason for test failures will probably be the new params array syntax.</p>
+
+<h2 id="explicit-arrays">Explicit Arrays</h2>
+
+<p>Because <code class="language-plaintext highlighter-rouge">params.expect</code> requires explicitly declaring expected Arrays, you’ll need to fix those manually where they occur.
+This is because <code class="language-plaintext highlighter-rouge">params.permit</code> did not distinguish between <code class="language-plaintext highlighter-rouge">[:key]</code> meaning an array of hashes, or a single hash.
+This could lead to some input problems in users send incorrect params.</p>
+
+<p>Hopefully your tests will fail with something like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Expected response to be a &lt;2XX: success&gt;, but was a &lt;400: Bad Request&gt;
+</code></pre></div></div>
+
+<p>Here’s a more complex example I ran into today:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># Original</span>
+<span class="n">params</span><span class="p">.</span><span class="nf">permit</span><span class="p">(</span><span class="ss">api_key_role: </span><span class="p">[</span>
+  <span class="ss">:name</span><span class="p">,</span>
+  <span class="ss">:oidc_provider_id</span><span class="p">,</span>
+  <span class="ss">api_key_permissions: </span><span class="p">[</span><span class="ss">:valid_for</span><span class="p">,</span> <span class="ss">scopes: </span><span class="p">[],</span> <span class="ss">gems: </span><span class="p">[]],</span>
+  <span class="ss">access_policy: </span><span class="p">{</span>
+    <span class="ss">statements_attributes: </span><span class="p">[</span> <span class="c1"># notice the single array here</span>
+      <span class="ss">:effect</span><span class="p">,</span>
+      <span class="ss">principal: :oidc</span><span class="p">,</span>
+      <span class="ss">conditions_attributes: </span><span class="sx">%i[operator claim value]</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">]).</span><span class="nf">require</span><span class="p">(</span><span class="ss">:api_key_role</span><span class="p">)</span></code></pre></figure>
+
+<p>The problem is that <code class="language-plaintext highlighter-rouge">statements_attributes</code> should be an array of hashes.
+To require that key to be an array, <code class="language-plaintext highlighter-rouge">params.expect</code> needs us to wrap the array in second array.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># Fixed</span>
+<span class="n">params</span><span class="p">.</span><span class="nf">expect</span><span class="p">(</span><span class="ss">api_key_role: </span><span class="p">[</span>
+  <span class="ss">:name</span><span class="p">,</span>
+  <span class="ss">:oidc_provider_id</span><span class="p">,</span>
+  <span class="ss">api_key_permissions: </span><span class="p">[</span><span class="ss">:valid_for</span><span class="p">,</span> <span class="ss">scopes: </span><span class="p">[],</span> <span class="ss">gems: </span><span class="p">[]],</span> <span class="c1"># this doesn't change</span>
+  <span class="ss">access_policy: </span><span class="p">{</span>
+    <span class="ss">statements_attributes: </span><span class="p">[[</span> <span class="c1"># notice the double array change here</span>
+      <span class="ss">:effect</span><span class="p">,</span>
+      <span class="ss">principal: :oidc</span><span class="p">,</span>
+      <span class="ss">conditions_attributes: </span><span class="p">[</span><span class="sx">%i[operator claim value]</span><span class="p">]</span> <span class="c1"># notice the double array here too</span>
+    <span class="p">]]</span>
+  <span class="p">}</span>
+<span class="p">].</span><span class="nf">freeze</span></code></pre></figure>
+
+<p>I left a lot of the extra detail here so you can see what does and does not change.</p>
+
+<p>Note how some of the arrays in the example don’t change and some do.
+The first one that I commented as “doesn’t change” is <code class="language-plaintext highlighter-rouge">api_key_permissions</code> which expects a Hash value with 3 keys, 2 of which are arrays. The empty arrays will allow any scalar values (numbers, strings, booleans), but not nested hashes or arrays.</p>
+
+<p>The fix here is to add a double array for key <code class="language-plaintext highlighter-rouge">statements_attributes</code> and <code class="language-plaintext highlighter-rouge">conditions_attributes</code>.
+This requires the value to be an array of hashes like the following (simplified, nesting reduced):</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="ss">access_policy: </span><span class="p">{</span>
+  <span class="ss">statements_attributes: </span><span class="p">[</span>
+    <span class="p">{</span> <span class="ss">effect: </span><span class="s2">""</span><span class="p">,</span> <span class="ss">principal: </span><span class="p">{</span> <span class="ss">oidc: </span><span class="s2">""</span> <span class="p">},</span> <span class="ss">conditions_attributes: </span><span class="p">[</span> <span class="p">{</span> <span class="ss">operator: </span><span class="s2">""</span><span class="p">,</span> <span class="ss">claim: </span><span class="s2">""</span><span class="p">,</span> <span class="ss">value: </span><span class="s2">""</span> <span class="p">},</span> <span class="o">...</span> <span class="p">]</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre></figure>
+
+<h2 id="a-hash-of-hashes-with-ids-for-keys">A Hash of Hashes with IDs for Keys</h2>
+
+<p>The next one stumped me for a bit before I tested it in the Rails console.
+The controller seemed very simple and I thought nothing of it during my search and replace.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">params</span><span class="p">.</span><span class="nf">expect</span><span class="p">(</span><span class="ss">ownerships: </span><span class="sx">%i[push owner]</span><span class="p">)</span></code></pre></figure>
+
+<p>However, our tests failed with the telltale <code class="language-plaintext highlighter-rouge">params.expect</code> failure:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Expected response to be a &lt;3XX: redirect&gt;, but was a &lt;400: Bad Request&gt;
+</code></pre></div></div>
+
+<p>I looked at the form and it sends something like the following, which I put it into the Rails console (<code class="language-plaintext highlighter-rouge">bin/rails c</code>) to test:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&gt;</span> <span class="n">params</span> <span class="o">=</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Parameters</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span>
+  <span class="ss">ownerships: </span><span class="p">{</span>
+    <span class="s2">"123"</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">push: </span><span class="s2">"on"</span><span class="p">,</span> <span class="ss">owner: </span><span class="s2">"on"</span> <span class="p">},</span>
+    <span class="s2">"456"</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">push: </span><span class="s2">"off"</span><span class="p">,</span> <span class="ss">owner: </span><span class="s2">"off"</span> <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">)</span>
+<span class="o">=&gt;</span> <span class="c1">#&lt;ActionController::Parameters {"ownerships"=&gt;{"123"=&gt;{"push"=&gt;"on", "owner"=&gt;"on"}, "456"=&gt;{"push"=&gt;...</span>
+<span class="o">&gt;</span> <span class="n">params</span><span class="p">.</span><span class="nf">expect</span><span class="p">(</span><span class="ss">ownerships: </span><span class="p">[</span><span class="sx">%i[push owner]</span><span class="p">])</span>
+<span class="o">=&gt;</span> <span class="c1">#&lt;ActionController::Parameters {"123"=&gt;#&lt;ActionController::Parameters {"push"=&gt;"on", "owner"=&gt;"on"} permitted: true&gt;, "456"=&gt;#&lt;ActionController::Parameters {"push"=&gt;"off", "owner"=&gt;"off"} permitted: true&gt;} permitted: true&gt;</span></code></pre></figure>
+
+<p>I thought this would be tricky, but Rails StrongParameters has rules that treat this like an array.
+The fix is just the same as the others: add a second set of array square brackets.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">params</span><span class="p">.</span><span class="nf">expect</span><span class="p">(</span><span class="ss">ownerships: </span><span class="p">[</span><span class="sx">%i[push owner]</span><span class="p">])</span></code></pre></figure>
+
+<p>Usually the changes should be this simple. Find single arrays that need to become explicit double arrays.</p>
+
+<h2 id="handling-_json-params">Handling <code class="language-plaintext highlighter-rouge">_json</code> Params</h2>
+
+<p>If your application uses the Rails <code class="language-plaintext highlighter-rouge">_json</code> key, the conversion here always requires an explicit array.
+Rails adds this key to params when JSON is posted with an Array root instead of a Hash.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># Before</span>
+<span class="n">array_or_hash</span> <span class="o">=</span> <span class="n">params</span><span class="p">.</span><span class="nf">require</span><span class="p">(</span><span class="ss">:_json</span><span class="p">).</span><span class="nf">permit</span><span class="p">(</span><span class="ss">:key</span><span class="p">,</span> <span class="ss">:other</span><span class="p">)</span>
+<span class="c1"># After</span>
+<span class="n">always_array</span> <span class="o">=</span> <span class="n">params</span><span class="p">.</span><span class="nf">expect</span><span class="p">(</span><span class="ss">_json: </span><span class="p">[[</span><span class="ss">:key</span><span class="p">,</span> <span class="ss">:other</span><span class="p">]])</span></code></pre></figure>
+
+<p>This new format ensures that you’re always receiving an array.
+While this doesn’t directly fix vulnerable code, it should make you think more clearly about what params you’re expecting.
+This in turn could help mitigate <a href="https://nastystereo.com/security/rails-_json-juggling-attack.html">a potential vulnerability enabled by inexplicit verification of input params</a>.</p>
+
+<h2 id="go-forth-and-expect">Go Forth and Expect</h2>
+
+<p>Mostly you can rest assured that if your original <code class="language-plaintext highlighter-rouge">permit</code> worked, then Rails already knows how to parse the input.
+The changes made to <code class="language-plaintext highlighter-rouge">expect</code> don’t change how rails parses permitted params.
+The new behavior distinguishes between expected arrays and expected hashes, requiring you to choose which one your controller needs.</p>
+
+<p>You can see all the changes I made in the <a href="https://github.com/rubygems/rubygems.org/pull/5357">GitHub PR for RubyGems.org</a> if you’re looking for real examples.</p>
+
+<h2 id="anything-i-didnt-cover">Anything I Didn’t Cover?</h2>
+
+<p>I can imagine a few more situations that might be tricky, but I’m assuming that if you encounter any of these, you’re already doing some tricks with permitting in your existing controller. Make sure your tests cover the situation and then see if you can use <code class="language-plaintext highlighter-rouge">expect</code>.</p>
+
+<p>If you encounter more problems, please let me know on whatever social you can find me on. (maybe check the <a href="/">homepage</a>?)</p>
+
+  </article>
+</div>
+
+
+      </main>
+    </div>
+    <script type="text/javascript">
+      //<![CDATA[
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-19274402-1']);
+        _gaq.push(['_setDomainName', '.martinemde.com']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      //]]>
+    </script>
+  </body>
+</html>

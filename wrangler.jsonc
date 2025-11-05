@@ -1,13 +1,13 @@
 {
-	"name": "martinemde-com",
-	"account_id": "9c275e0c035e53370143e8cf240dfb3f",
-	"main": "./.cloudflare/worker.js",
-	"assets": {
-		"directory": "./.cloudflare/public",
-		"binding": "ASSETS"
-	},
-	"build": {
-		"command": "npm run build"
-	},
-	"compatibility_date": "2021-11-12"
+  "name": "martinemde-com",
+  "account_id": "9c275e0c035e53370143e8cf240dfb3f",
+  "main": "./.cloudflare/worker.js",
+  "assets": {
+    "directory": "./.cloudflare/public",
+    "binding": "ASSETS"
+  },
+  "build": {
+    "command": "bun run build"
+  },
+  "compatibility_date": "2025-11-05"
 }
