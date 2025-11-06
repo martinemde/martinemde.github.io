@@ -3,26 +3,13 @@
   <meta name="description" content="About Martin Emde" />
 </svelte:head>
 
-<div class="mx-auto max-w-4xl">
-  <div class="card variant-filled-surface p-8">
-    <div class="prose prose-lg max-w-none">
-      <h1>About</h1>
-      <p>
-        Software Engineer Consultant at <a
-          href="https://cloudcity.io/"
-          rel="external"
-          class="anchor">Cloud City Development</a
-        >. Maintainer of
-        <a href="https://github.com/rubygems/rubygems" rel="external" class="anchor">RubyGems</a>,
-        <a href="https://rubygems.org" rel="external" class="anchor">RubyGems.org</a> &amp; Bundler.
-      </p>
-      <p>
-        Learn more about my work on <a
-          href="https://github.com/martinemde"
-          rel="external"
-          class="anchor">GitHub</a
-        >.
-      </p>
-    </div>
-  </div>
+<div>
+  <h1 class="mb-12 text-4xl font-bold">About</h1>
+
+  <p class="text-lg text-gray-700 dark:text-gray-300">
+    Developer Productivity (Modularity) at
+    <a href="https://gusto.com" rel="external" class="hover:text-gray-600 dark:hover:text-gray-400">Gusto</a>. Founding member of
+    <a href="https://gem.coop" rel="external" class="hover:text-gray-600 dark:hover:text-gray-400">gem.coop</a>. See also:
+    <a href="https://github.com/martinemde" rel="external" class="hover:text-gray-600 dark:hover:text-gray-400">GitHub</a>.
+  </p>
 </div>
