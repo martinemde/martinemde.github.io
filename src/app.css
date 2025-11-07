@@ -25,6 +25,7 @@ body {
   background-color: var(--shiki-light-bg);
 }
 
+/* Dark mode via prefers-color-scheme */
 @media (prefers-color-scheme: dark) {
   .shiki,
   .shiki span {
@@ -33,15 +34,9 @@ body {
   }
 }
 
-/* For Skeleton's theme system */
-[data-theme='mona'] .shiki,
-[data-theme='mona'] .shiki span {
-  color: var(--shiki-light);
-  background-color: var(--shiki-light-bg);
-}
-
-[data-theme='mona'][data-color-mode='dark'] .shiki,
-[data-theme='mona'][data-color-mode='dark'] .shiki span {
+/* Dark mode via Skeleton's data-mode attribute */
+[data-mode='dark'] .shiki,
+[data-mode='dark'] .shiki span {
   color: var(--shiki-dark);
   background-color: var(--shiki-dark-bg);
 }
