@@ -12,12 +12,12 @@
 </svelte:head>
 
 <article>
-  <header class="mb-8 border-b border-gray-200 pb-8 dark:border-gray-800">
+  <header class="mb-8 border-b border-surface-200-800 pb-8">
     {#if data.metadata.title}
       <h1 class="mb-4 text-4xl font-bold">{data.metadata.title}</h1>
     {/if}
     {#if data.metadata.date}
-      <div class="text-sm text-gray-600 dark:text-gray-400">
+      <div class="text-sm text-surface-600-400">
         {new Date(data.metadata.date).toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'long',
