@@ -17,3 +17,43 @@ body {
   font-family: var(--font-body);
   line-height: 1.6;
 }
+
+/* Shiki dual-theme support */
+.shiki,
+.shiki span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  .shiki,
+  .shiki span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
+  }
+}
+
+/* For Skeleton's theme system */
+[data-theme='mona'] .shiki,
+[data-theme='mona'] .shiki span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+[data-theme='mona'][data-color-mode='dark'] .shiki,
+[data-theme='mona'][data-color-mode='dark'] .shiki span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+/* Style code blocks */
+.shiki {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.shiki code {
+  font-family: var(--font-mono);
+}
