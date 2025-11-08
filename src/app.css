@@ -11,9 +11,32 @@
     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
     'Helvetica Neue', sans-serif;
   --font-mono: 'Fira Mono', monospace;
+  color-scheme: light dark;
 }
 
 body {
   font-family: var(--font-body);
   line-height: 1.6;
+}
+
+/* Shiki dual-theme support using CSS light-dark() function */
+.shiki,
+.shiki span {
+  color: light-dark(var(--shiki-light), var(--shiki-dark));
+  background-color: light-dark(var(--shiki-light-bg), var(--shiki-dark-bg));
+  font-style: light-dark(var(--shiki-light-font-style), var(--shiki-dark-font-style));
+  font-weight: light-dark(var(--shiki-light-font-weight), var(--shiki-dark-font-weight));
+  text-decoration: light-dark(var(--shiki-light-text-decoration), var(--shiki-dark-text-decoration));
+}
+
+/* Style code blocks */
+.shiki {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.shiki code {
+  font-family: var(--font-mono);
 }
