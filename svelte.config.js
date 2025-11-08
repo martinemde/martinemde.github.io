@@ -24,7 +24,8 @@ const config = {
             themes: {
               light: 'github-light',
               dark: 'github-dark'
-            }
+            },
+            defaultColor: false
           });
           // Escape backticks and backslashes for Svelte template
           const escaped = html.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$/g, '\\$');

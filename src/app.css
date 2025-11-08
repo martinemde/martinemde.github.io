@@ -24,6 +24,9 @@ body {
 .shiki span {
   color: light-dark(var(--shiki-light), var(--shiki-dark));
   background-color: light-dark(var(--shiki-light-bg), var(--shiki-dark-bg));
+  font-style: light-dark(var(--shiki-light-font-style), var(--shiki-dark-font-style));
+  font-weight: light-dark(var(--shiki-light-font-weight), var(--shiki-dark-font-weight));
+  text-decoration: light-dark(var(--shiki-light-text-decoration), var(--shiki-dark-text-decoration));
 }
 
 /* Style code blocks */
