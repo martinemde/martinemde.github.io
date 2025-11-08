@@ -8,7 +8,7 @@
     theme?: string;
   }
 
-  let { code, lang = 'typescript', theme = 'github-dark' }: Props = $props();
+  let { code, lang = 'ruby', theme = 'catppuccin-latte' }: Props = $props();
   let html = $state('');
 
   onMount(async () => {
@@ -20,7 +20,7 @@
 </script>
 
 {#if html}
-  <div class="code-block [&>pre]:rounded-lg [&>pre]:p-4 [&>pre]:overflow-x-auto">
+  <div class="code-block [&>pre]:overflow-x-auto [&>pre]:rounded-lg [&>pre]:p-4">
     {@html html}
   </div>
 {:else}

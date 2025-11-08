@@ -5,7 +5,7 @@ import { createHighlighter } from 'shiki';
 
 // Create a highlighter instance for mdsvex
 const highlighter = await createHighlighter({
-  themes: ['github-dark', 'github-light'],
+  themes: ['catppuccin-latte', 'catppuccin-macchiato'],
   langs: ['ruby', 'javascript', 'typescript', 'html', 'css', 'bash', 'json']
 });
 
@@ -22,8 +22,8 @@ const config = {
           const html = highlighter.codeToHtml(code, {
             lang,
             themes: {
-              light: 'github-light',
-              dark: 'github-dark'
+              light: 'catppuccin-latte',
+              dark: 'catppuccin-macchiato'
             },
             defaultColor: false
           });
