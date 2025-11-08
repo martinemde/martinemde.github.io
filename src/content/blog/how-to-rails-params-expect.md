@@ -184,5 +184,3 @@ Right now I'm committed to improving the Ruby, RubyGems, and Ruby on Rails ecosy
 
 Are you and your company comfortable with your reliance on open source? To avoid worst case scenarios, your company needs at least one engineer on your team dedicating their time to open source maintenance.
 If you use Ruby, then you rely on the work of the RubyGems team. I'd love to work with you to help your team succeed in the Ruby ecosystem.
-
-If you would like to work with me and my colleagues to improve or maintain the code you rely on, connect with me at [Cloud City Development](https://cloudcity.io) where you can hire our world class team.

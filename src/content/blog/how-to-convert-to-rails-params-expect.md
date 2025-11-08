@@ -163,24 +163,11 @@ test "handles missing user param" do
 end
 ```
 
-## Additional Benefits
-
-Beyond security improvements, `params.expect` also provides:
-
-1. **Clearer intent** - The parameter structure is explicitly declared
-2. **Better error messages** - More specific feedback about what went wrong
-3. **Consistent behavior** - No more surprises with edge cases
-
 ## My Experience Converting RubyGems.org
 
-When I converted RubyGems.org to use `params.expect`, I found that:
+Beyond security improvements, `params.expect` also provides clearer intent with parameter structure explicitly declared. You get better error messages with more specific feedback, and more consistent behavior with less underspecified edge cases.
 
-- Most conversions were straightforward
-- Complex parameter handling became more explicit and easier to understand
-- We caught several edge cases we hadn't properly handled before
-- The code became more self-documenting
-
-## Summary
+When I converted RubyGems.org to use `params.expect`, I found that most conversions were straightforward. Complex parameter handling became more explicit and easier to understand. We caught several edge cases we hadn't properly handled before and the code became more self-documenting.
 
 Converting to `params.expect` improves security and code clarity. Start with the simple cases, and don't be afraid to use conditional logic or helper methods for complex parameter handling.
 
