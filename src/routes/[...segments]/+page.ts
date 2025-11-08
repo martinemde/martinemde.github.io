@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import { getAllPosts } from '$lib/utils/posts';
+import { getPostBySlug, validatePostDate } from '$lib/utils/posts';
 
 export const prerender = false;
 
@@ -17,27 +17,28 @@ export const load: PageLoad = async ({ params }) => {
 
   const [, year, month, day, slug] = match;
 
-  // Get all posts and find one matching the date and slug
-  const posts = await getAllPosts();
-  const post = posts.find((p) => {
-    const postDate = new Date(p.date);
-    const postYear = postDate.getFullYear().toString();
-    const postMonth = (postDate.getMonth() + 1).toString().padStart(2, '0');
-    const postDay = postDate.getDate().toString().padStart(2, '0');
+  console.log('Date redirect - slug:', slug, 'date:', `${year}-${month}-${day}`);
 
-    return (
-      postYear === year &&
-      postMonth === month &&
-      postDay === day &&
-      p.slug === slug
-    );
-  });
+  // Try to load the post by slug
+  const post = await getPostBySlug(slug);
 
   if (!post) {
+    console.log('Post not found:', slug);
     // No matching post found, redirect to blog index
     throw redirect(301, '/blog');
   }
 
+  console.log('Post found, metadata date:', post.metadata.date);
+
+  // Validate that the post's date matches the URL date
+  if (!validatePostDate(post.metadata, year, month, day)) {
+    console.log('Date mismatch - expected:', `${year}-${month}-${day}`, 'got:', post.metadata.date);
+    // Date mismatch, redirect to blog index
+    throw redirect(301, '/blog');
+  }
+
+  console.log('Redirecting to:', `/blog/${post.metadata.slug}`);
+
   // Redirect to the new slug-based URL
-  throw redirect(301, `/blog/${post.slug}`);
+  throw redirect(301, `/blog/${post.metadata.slug}`);
 };

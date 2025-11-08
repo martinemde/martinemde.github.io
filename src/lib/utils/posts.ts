@@ -50,3 +50,64 @@ export async function getRecentPosts(limit: number): Promise<Post[]> {
   const posts = await getAllPosts();
   return posts.slice(0, limit);
 }
+
+/**
+ * Load a single post by slug
+ * Tries both .md and .svx extensions
+ */
+export async function getPostBySlug(slug: string) {
+  try {
+    // Try .md extension first
+    const post = await import(`../../content/blog/${slug}.md`);
+    return {
+      content: post.default,
+      metadata: post.metadata as PostMetadata
+    };
+  } catch {
+    try {
+      // Try .svx extension
+      const post = await import(`../../content/blog/${slug}.svx`);
+      return {
+        content: post.default,
+        metadata: post.metadata as PostMetadata
+      };
+    } catch {
+      return null;
+    }
+  }
+}
+
+/**
+ * Validate that a post matches the expected date components
+ */
+export function validatePostDate(
+  metadata: PostMetadata,
+  year: string,
+  month: string,
+  day: string
+): boolean {
+  // Parse the date string directly to avoid timezone issues
+  // Dates in frontmatter are in YYYY-MM-DD format
+  const dateStr = metadata.date.toString().split('T')[0]; // Get just the date part
+  const [postYear, postMonth, postDay] = dateStr.split('-');
+
+  return postYear === year && postMonth === month && postDay === day;
+}
+
+/**
+ * Get raw content of a post by slug (for text/plain endpoints)
+ * Uses Vite's glob import with ?raw query
+ */
+const rawPosts = import.meta.glob('../../content/blog/*.{md,svx}', {
+  query: '?raw',
+  import: 'default',
+  eager: true
+});
+
+export function getRawPostBySlug(slug: string): string | null {
+  // Keys are relative to this file: ../../content/blog/slug.{md,svx}
+  const mdKey = `../../content/blog/${slug}.md`;
+  const svxKey = `../../content/blog/${slug}.svx`;
+
+  return (rawPosts[mdKey] || rawPosts[svxKey]) as string | null;
+}

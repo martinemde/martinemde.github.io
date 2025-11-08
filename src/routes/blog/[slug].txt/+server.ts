@@ -1,21 +1,16 @@
 import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
+import { getRawPostBySlug } from '$lib/utils/posts';
 
-// Import all blog posts at build time using Vite's glob import
-const posts = import.meta.glob('/src/content/blog/*.{md,svx}', {
-  query: '?raw',
-  import: 'default',
-  eager: true
-});
-
+/**
+ * API endpoint for serving raw markdown content as text/plain
+ * Uses +server.ts (not +page.ts) because this returns raw text with custom
+ * Content-Type headers, not an HTML page
+ */
 export const GET: RequestHandler = async ({ params }) => {
   const { slug } = params;
 
-  // Try to find the post with this slug
-  const mdKey = `/src/content/blog/${slug}.md`;
-  const svxKey = `/src/content/blog/${slug}.svx`;
-
-  const content = (posts[mdKey] || posts[svxKey]) as string | undefined;
+  const content = getRawPostBySlug(slug);
 
   if (!content) {
     throw error(404, `Post not found: ${slug}`);
