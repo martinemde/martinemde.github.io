@@ -1,5 +1,6 @@
 {
   "lockfileVersion": 1,
+  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "martinemde.github.io",
@@ -8,8 +9,8 @@
         "@eslint/js": "^9.18.0",
         "@fontsource/fira-mono": "^5.2.7",
         "@neoconfetti/svelte": "^2.0.0",
-        "@skeletonlabs/skeleton": "^3.2.0",
-        "@skeletonlabs/skeleton-svelte": "^4.2.4",
+        "@skeletonlabs/skeleton": "4.3.0",
+        "@skeletonlabs/skeleton-svelte": "^4.3.0",
         "@sveltejs/adapter-auto": "^6.0.0",
         "@sveltejs/adapter-cloudflare": "^7.2.4",
         "@sveltejs/kit": "^2.22.0",
@@ -266,11 +267,11 @@
 
     "@sindresorhus/is": ["@sindresorhus/is@7.0.2", "", {}, "sha512-d9xRovfKNz1SKieM0qJdO+PQonjnnIfSNWfHYnBSJ9hkjm0ZPw6HlxscDXYstp3z+7V2GOFHc+J0CYrYTjqCJw=="],
 
-    "@skeletonlabs/skeleton": ["@skeletonlabs/skeleton@3.2.0", "", { "peerDependencies": { "tailwindcss": "^4.0.0" } }, "sha512-pV1IXFr3uOfeS4ISHEvONGke25p2GRKVtbEtF11HPcM2P8UKBFyPaIT7bAmlVE1vdIlq5x77+F8b77+6LuvWWw=="],
+    "@skeletonlabs/skeleton": ["@skeletonlabs/skeleton@4.3.0", "", { "peerDependencies": { "tailwindcss": "^4.0.0" } }, "sha512-S/cjJ8/crC2rKMguLueRt1zrLF4V9/u5Mm9R5m4wmMID2b+EuW5Ne3CMGaTjMquCUxic7qtD0nl4BKYVWTxVmg=="],
 
-    "@skeletonlabs/skeleton-common": ["@skeletonlabs/skeleton-common@4.2.4", "", {}, "sha512-XLypRzqh5UpxpYbW7GCX3WWTCEzFvndgEqWQVM+2+J+LYi3/3xsfKWzloYUWNpTVSYc14hkec8n5ucW7E6CqyQ=="],
+    "@skeletonlabs/skeleton-common": ["@skeletonlabs/skeleton-common@4.3.0", "", {}, "sha512-zzZIZolJ4GDXoQv2JN5nfDKXGH9KWlt/lgFoqSFoPXFEKchqtx4NmKh+eXC02mrqtVBtJOIEwQcVkynzdIdhgQ=="],
 
-    "@skeletonlabs/skeleton-svelte": ["@skeletonlabs/skeleton-svelte@4.2.4", "", { "dependencies": { "@internationalized/date": "3.10.0", "@skeletonlabs/skeleton-common": "4.2.4", "@zag-js/accordion": "1.27.0", "@zag-js/avatar": "1.27.0", "@zag-js/collapsible": "1.27.0", "@zag-js/collection": "1.27.0", "@zag-js/combobox": "1.27.0", "@zag-js/date-picker": "1.27.0", "@zag-js/dialog": "1.27.0", "@zag-js/file-upload": "1.27.0", "@zag-js/listbox": "1.27.0", "@zag-js/pagination": "1.27.0", "@zag-js/popover": "1.27.0", "@zag-js/progress": "1.27.0", "@zag-js/radio-group": "1.27.0", "@zag-js/rating-group": "1.27.0", "@zag-js/slider": "1.27.0", "@zag-js/svelte": "1.27.0", "@zag-js/switch": "1.27.0", "@zag-js/tabs": "1.27.0", "@zag-js/tags-input": "1.27.0", "@zag-js/toast": "1.27.0", "@zag-js/toggle-group": "1.27.0", "@zag-js/tooltip": "1.27.0", "@zag-js/tree-view": "1.27.0" }, "peerDependencies": { "svelte": "^5.29.0" } }, "sha512-h6kNiNw91CQLK2+R0oSPAH6v/i11yZTYLvQrarRCU9teIF7Y+fh7EY7Fq3foBaLeA0iKMI/pHWsiUIJ8j556GA=="],
+    "@skeletonlabs/skeleton-svelte": ["@skeletonlabs/skeleton-svelte@4.3.0", "", { "dependencies": { "@internationalized/date": "3.10.0", "@skeletonlabs/skeleton-common": "4.3.0", "@zag-js/accordion": "1.27.0", "@zag-js/avatar": "1.27.0", "@zag-js/collapsible": "1.27.0", "@zag-js/collection": "1.27.0", "@zag-js/combobox": "1.27.0", "@zag-js/date-picker": "1.27.0", "@zag-js/dialog": "1.27.0", "@zag-js/file-upload": "1.27.0", "@zag-js/listbox": "1.27.0", "@zag-js/pagination": "1.27.0", "@zag-js/popover": "1.27.0", "@zag-js/progress": "1.27.0", "@zag-js/radio-group": "1.27.0", "@zag-js/rating-group": "1.27.0", "@zag-js/slider": "1.27.0", "@zag-js/svelte": "1.27.0", "@zag-js/switch": "1.27.0", "@zag-js/tabs": "1.27.0", "@zag-js/tags-input": "1.27.0", "@zag-js/toast": "1.27.0", "@zag-js/toggle-group": "1.27.0", "@zag-js/tooltip": "1.27.0", "@zag-js/tree-view": "1.27.0" }, "peerDependencies": { "svelte": "^5.29.0" } }, "sha512-kTDKgZrh4NxfLjQHyfVyLusrfMcdJKxCcgurP7Tl87kExYpocf5/7mcMKS07pv2K1JQqaGFY8IUDZpDQYeokOw=="],
 
     "@speed-highlight/core": ["@speed-highlight/core@1.2.7", "", {}, "sha512-0dxmVj4gxg3Jg879kvFS/msl4s9F3T9UXC1InxgOf7t5NvcPD97u/WTA5vL/IxWHMn7qSxBozqrnnE2wvl1m8g=="],
 
