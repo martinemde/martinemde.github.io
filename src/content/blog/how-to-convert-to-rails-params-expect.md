@@ -131,14 +131,6 @@ def user_params
     params.expect(user: [:name, :handle])
   end
 end
-
-def user_params_with_conditional_admin
-  base_params = params.expect(user: [:name, :handle])
-  return base_params unless current_user.admin?
-
-  admin_params = params.expect(user: [:admin])
-  base_params.merge(admin_params)
-end
 ```
 
 ## Testing Your Conversion
