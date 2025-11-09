@@ -1,8 +1,7 @@
 version: 2
 updates:
-  # Enable version updates for npm dependencies
-  # Dependabot supports bun.lock files natively via npm ecosystem
-  - package-ecosystem: 'npm'
+  # Enable version updates for Bun dependencies
+  - package-ecosystem: 'bun'
     directory: '/'
     schedule:
       interval: 'weekly'
