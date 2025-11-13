@@ -13,7 +13,7 @@ export const GET: RequestHandler = async () => {
 	let content = '# Martin Emde\n\n';
 
 	for (const post of posts) {
-		const url = `${baseUrl}/blog/${post.slug}`;
+		const url = `${baseUrl}/blog/${post.slug}.txt`;
 		content += `- [${post.title}](${url})\n`;
 	}
 
