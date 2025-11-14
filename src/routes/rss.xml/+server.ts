@@ -1,5 +1,5 @@
 import { getRecentPosts, getRawPostBySlug, type Post } from '$lib/utils/posts';
-import { marked } from 'marked';
+import { compile } from 'mdsvex';
 
 const siteUrl = 'https://martinemde.com';
 const siteTitle = 'Martin Emde';
@@ -34,12 +34,21 @@ async function feedItems(posts: Post[]): Promise<string> {
       // Get the raw markdown content
       const rawContent = getRawPostBySlug(post.slug);
 
-      // Convert markdown to HTML
+      // Convert markdown to HTML using mdsvex
       let htmlContent = '';
       if (rawContent) {
         // Remove frontmatter from the raw content
         const contentWithoutFrontmatter = rawContent.replace(/^---[\s\S]*?---\n/, '');
-        htmlContent = await marked(contentWithoutFrontmatter);
+        const compiled = await compile(contentWithoutFrontmatter);
+        if (compiled?.code) {
+          // Extract the HTML from the compiled Svelte component
+          // mdsvex wraps content in a Svelte component, we need just the HTML
+          htmlContent = compiled.code
+            .replace(/<script[\s\S]*?<\/script>/g, '')
+            .replace(/<\/script>/g, '')
+            .replace(/export default [\s\S]*$/g, '')
+            .trim();
+        }
       }
 
       return `
