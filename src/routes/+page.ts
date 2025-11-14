@@ -6,7 +6,7 @@ export const prerender = true;
 
 export const load: PageLoad = async () => {
   // Load the 2 most recent blog posts for the homepage
-  const recentPosts = await getRecentPosts(2);
+  const recentPosts = await getRecentPosts(5);
 
   return {
     recentPosts
