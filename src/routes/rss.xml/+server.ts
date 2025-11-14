@@ -1,4 +1,5 @@
-import { getAllPosts, type Post } from '$lib/utils/posts';
+import { getRecentPosts, getRawPostBySlug, type Post } from '$lib/utils/posts';
+import { marked } from 'marked';
 
 const siteUrl = 'https://martinemde.com';
 const siteTitle = 'Martin Emde';
@@ -6,16 +7,16 @@ const siteDescription = 'Blog posts by Martin Emde';
 const siteEmail = 'me@martinemde.com';
 
 export async function GET() {
-  const posts = await getAllPosts();
+  const posts = await getRecentPosts(20);
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
 	<channel>
 		<title>${siteTitle}</title>
 		<description>${siteDescription}</description>
 		<link>${siteUrl}</link>
 		<atom:link href="${siteUrl}/rss.xml" rel="self" type="application/rss+xml" />
-    ${feedItems(posts)}
+    ${await feedItems(posts)}
 	</channel>
 </rss>`.trim();
 
@@ -27,10 +28,21 @@ export async function GET() {
   });
 }
 
-function feedItems(posts: Post[]): string {
-  return posts
-    .map(
-      (post) => `
+async function feedItems(posts: Post[]): Promise<string> {
+  const items = await Promise.all(
+    posts.map(async (post) => {
+      // Get the raw markdown content
+      const rawContent = getRawPostBySlug(post.slug);
+
+      // Convert markdown to HTML
+      let htmlContent = '';
+      if (rawContent) {
+        // Remove frontmatter from the raw content
+        const contentWithoutFrontmatter = rawContent.replace(/^---[\s\S]*?---\n/, '');
+        htmlContent = await marked(contentWithoutFrontmatter);
+      }
+
+      return `
 		<item>
 			<title>${escapeXml(post.title)}</title>
 			<description>${escapeXml(post.description || '')}</description>
@@ -38,9 +50,12 @@ function feedItems(posts: Post[]): string {
 			<guid isPermaLink="true">${siteUrl}/blog/${post.slug}</guid>
 			<pubDate>${new Date(post.date).toUTCString()}</pubDate>
 			${post.author ? `<author>${siteEmail} (${escapeXml(post.author)})</author>` : ''}
-		</item>`
-    )
-    .join('');
+			<content:encoded><![CDATA[${htmlContent}]]></content:encoded>
+		</item>`;
+    })
+  );
+
+  return items.join('');
 }
 
 function escapeXml(unsafe: string): string {
