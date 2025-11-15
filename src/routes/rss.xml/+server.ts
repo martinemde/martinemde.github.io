@@ -40,6 +40,8 @@ async function feedItems(posts: Post[]): Promise<string> {
         // Remove frontmatter from the raw content
         const contentWithoutFrontmatter = rawContent.replace(/^---[\s\S]*?---\n/, '');
         htmlContent = await marked(contentWithoutFrontmatter);
+        // Escape ]]> within CDATA by replacing it with ]]]]><![CDATA[>
+        htmlContent = htmlContent.replace(/\]\]>/g, ']]]]><![CDATA[>');
       }
 
       return `
