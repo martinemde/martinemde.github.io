@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { PageData } from './$types';
+  import ShareButtons from '$lib/components/ShareButtons.svelte';
 
   let { data }: { data: PageData } = $props();
 </script>
@@ -16,18 +17,34 @@
     {#if data.metadata.title}
       <h1 class="mb-4 text-4xl font-bold">{data.metadata.title}</h1>
     {/if}
-    {#if data.metadata.date}
-      <div class="text-sm text-surface-600-400">
-        {new Date(data.metadata.date).toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        })}
+    <div class="text-sm text-surface-600-400">
+      <div class="flex items-center justify-between gap-4">
+        {#if data.metadata.date}
+          {new Date(data.metadata.date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}
+        {/if}
+        <ShareButtons
+          slug={data.metadata.slug}
+          title={data.metadata.title}
+          description={data.metadata.description}
+        />
       </div>
-    {/if}
+    </div>
   </header>
 
   <div class="prose prose-lg max-w-none dark:prose-invert">
     <data.content />
   </div>
+
+  <footer class="mt-12 flex items-center gap-4 pt-6">
+    <span class="text-sm text-surface-600-400">Share this article:</span>
+    <ShareButtons
+      slug={data.metadata.slug}
+      title={data.metadata.title}
+      description={data.metadata.description}
+    />
+  </footer>
 </article>
