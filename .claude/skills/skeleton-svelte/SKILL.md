@@ -33,6 +33,7 @@ Use Skeleton's composed pattern with granular child components. Components accep
 **Critical:** Always use color pairings for theme-aware styling. Never hard-code colors with `dark:` prefixes.
 
 ✅ Correct:
+
 ```svelte
 <div class="bg-surface-50-950 text-surface-950-50">
   <p class="text-surface-700-300">Content</p>
@@ -40,8 +41,9 @@ Use Skeleton's composed pattern with granular child components. Components accep
 ```
 
 ❌ Incorrect:
+
 ```svelte
-<div class="bg-white dark:bg-gray-950 text-black dark:text-white">
+<div class="bg-white text-black dark:bg-gray-950 dark:text-white">
   <p class="text-gray-700 dark:text-gray-300">Content</p>
 </div>
 ```
@@ -49,6 +51,7 @@ Use Skeleton's composed pattern with granular child components. Components accep
 **Color pairing syntax:** `{property}-{color}-{lightShade}-{darkShade}`
 
 Examples:
+
 - `bg-surface-50-950` - Light background in light mode, dark in dark mode
 - `text-surface-950-50` - Dark text in light mode, light in dark mode
 - `border-surface-300-700` - Adaptive border colors
@@ -115,7 +118,7 @@ Add color pairings and presets using the `class` attribute:
 ```svelte
 <Card class="preset-outlined-surface-300-700">
   <Card.Content>
-    <h3 class="text-surface-950-50 font-semibold">Heading</h3>
+    <h3 class="font-semibold text-surface-950-50">Heading</h3>
     <p class="text-surface-700-300">Description text</p>
   </Card.Content>
 </Card>
@@ -131,9 +134,7 @@ Use Svelte 5 runes for reactive state:
   let open = $state(false);
 </script>
 
-<Button onclick={() => open = true} class="preset-filled-primary-500">
-  Open Dialog
-</Button>
+<Button onclick={() => (open = true)} class="preset-filled-primary-500">Open Dialog</Button>
 
 <Dialog bind:open>
   <Dialog.Content>
@@ -182,7 +183,7 @@ Use semantic elements for proper structure:
 Use Tailwind's responsive prefixes for mobile-first design:
 
 ```svelte
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
   <!-- Responsive grid -->
 </div>
 ```
@@ -192,7 +193,7 @@ Use Tailwind's responsive prefixes for mobile-first design:
 Apply color pairings throughout the layout:
 
 ```svelte
-<header class="bg-surface-50-950 border-b border-surface-300-700">
+<header class="border-b border-surface-300-700 bg-surface-50-950">
   <!-- Header content -->
 </header>
 
@@ -233,12 +234,10 @@ Apply color pairings throughout the layout:
       aria-invalid={!!error}
     />
     {#if error}
-      <p class="text-error-500 text-sm mt-1">{error}</p>
+      <p class="mt-1 text-sm text-error-500">{error}</p>
     {/if}
   </div>
-  <Button type="submit" class="preset-filled-primary-500 mt-4">
-    Submit
-  </Button>
+  <Button type="submit" class="mt-4 preset-filled-primary-500">Submit</Button>
 </form>
 ```
 
@@ -249,7 +248,7 @@ Apply color pairings throughout the layout:
   import { Card } from '@skeletonlabs/skeleton-svelte';
 </script>
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
   {#each items as item}
     <Card class="preset-filled-surface-100-900">
       <Card.Header>
@@ -278,6 +277,7 @@ Apply color pairings throughout the layout:
 ## Project-Specific Configuration
 
 This project uses:
+
 - **Skeleton with Svelte 5** and **SvelteKit 2+**
 - **Tailwind CSS 4.x**
 - **Mona theme** (configured in `src/app.html`)
