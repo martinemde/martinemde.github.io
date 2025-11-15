@@ -57,12 +57,37 @@
       <h1 class="mb-4 text-4xl font-bold">{data.metadata.title}</h1>
     {/if}
     {#if data.metadata.date}
-      <div class="text-sm text-surface-600-400">
-        {new Date(data.metadata.date).toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        })}
+      <div class="flex items-center justify-between gap-4">
+        <div class="text-sm text-surface-600-400">
+          {new Date(data.metadata.date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}
+        </div>
+        <div class="flex gap-2">
+          <button
+            onclick={shareArticle}
+            class="inline-flex items-center gap-2 rounded-lg border border-surface-300-700 px-3 py-1.5 text-sm transition-colors hover:bg-surface-100-900"
+            aria-label="Share article"
+          >
+            <Share2 size={16} />
+            <span>Share</span>
+          </button>
+          <button
+            onclick={copyToClipboard}
+            class="inline-flex items-center gap-2 rounded-lg border border-surface-300-700 px-3 py-1.5 text-sm transition-colors hover:bg-surface-100-900"
+            aria-label="Copy article text"
+          >
+            {#if copied}
+              <Check size={16} class="text-success-500" />
+              <span>Copied!</span>
+            {:else}
+              <Copy size={16} />
+              <span>Copy Text</span>
+            {/if}
+          </button>
+        </div>
       </div>
     {/if}
   </header>
