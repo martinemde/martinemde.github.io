@@ -8,9 +8,7 @@ Skeleton components use a **composed pattern** with granular child elements. Thi
 
 ```svelte
 <ParentComponent>
-  <ChildComponent.SubComponent>
-    Content
-  </ChildComponent.SubComponent>
+  <ChildComponent.SubComponent>Content</ChildComponent.SubComponent>
 </ParentComponent>
 ```
 
@@ -32,12 +30,12 @@ Display user profile images with fallback support.
 </Avatar>
 
 <!-- Size variants -->
-<Avatar class="w-8 h-8">
+<Avatar class="h-8 w-8">
   <Avatar.Image src="/avatar.jpg" alt="Small" />
   <Avatar.Fallback>SM</Avatar.Fallback>
 </Avatar>
 
-<Avatar class="w-16 h-16">
+<Avatar class="h-16 w-16">
   <Avatar.Image src="/avatar.jpg" alt="Large" />
   <Avatar.Fallback>LG</Avatar.Fallback>
 </Avatar>
@@ -71,15 +69,15 @@ Interactive buttons with variants and states.
 
 <!-- States -->
 <Button disabled class="preset-filled-primary-500">Disabled</Button>
-<Button class="preset-filled-primary-500 hover:preset-filled-primary-600">Hover Effect</Button>
+<Button class="hover:preset-filled-primary-600 preset-filled-primary-500">Hover Effect</Button>
 
 <!-- Sizes -->
-<Button class="preset-filled-primary-500 text-sm px-3 py-1">Small</Button>
+<Button class="preset-filled-primary-500 px-3 py-1 text-sm">Small</Button>
 <Button class="preset-filled-primary-500 px-4 py-2">Default</Button>
-<Button class="preset-filled-primary-500 text-lg px-6 py-3">Large</Button>
+<Button class="preset-filled-primary-500 px-6 py-3 text-lg">Large</Button>
 
 <!-- Full width -->
-<Button class="preset-filled-primary-500 w-full">Full Width</Button>
+<Button class="w-full preset-filled-primary-500">Full Width</Button>
 ```
 
 ### Card
@@ -114,7 +112,7 @@ Container component for grouping related content.
 </Card>
 
 <!-- Interactive card -->
-<Card class="preset-filled-surface-100-900 hover:shadow-lg transition-shadow cursor-pointer">
+<Card class="cursor-pointer preset-filled-surface-100-900 transition-shadow hover:shadow-lg">
   <Card.Content>
     <h3 class="text-lg font-semibold">Clickable Card</h3>
     <p class="text-surface-700-300">Click to navigate</p>
@@ -132,9 +130,7 @@ Modal dialogs for focused user interactions.
   let open = $state(false);
 </script>
 
-<Button onclick={() => open = true} class="preset-filled-primary-500">
-  Open Dialog
-</Button>
+<Button onclick={() => (open = true)} class="preset-filled-primary-500">Open Dialog</Button>
 
 <Dialog bind:open>
   <Dialog.Content class="bg-surface-50-950">
@@ -148,12 +144,8 @@ Modal dialogs for focused user interactions.
     </Dialog.Body>
 
     <Dialog.Footer class="flex justify-end gap-2">
-      <Button onclick={() => open = false} class="preset-outlined-surface-300-700">
-        Cancel
-      </Button>
-      <Button onclick={() => open = false} class="preset-filled-primary-500">
-        Confirm
-      </Button>
+      <Button onclick={() => (open = false)} class="preset-outlined-surface-300-700">Cancel</Button>
+      <Button onclick={() => (open = false)} class="preset-filled-primary-500">Confirm</Button>
     </Dialog.Footer>
   </Dialog.Content>
 </Dialog>
@@ -192,7 +184,7 @@ Form input fields with labels.
     class="border-surface-300-700"
   />
   {#if value.length < 8}
-    <p class="text-error-500 text-sm mt-1">Password must be at least 8 characters</p>
+    <p class="mt-1 text-sm text-error-500">Password must be at least 8 characters</p>
   {/if}
 </div>
 
@@ -243,7 +235,7 @@ Selection controls for forms.
 
 <!-- Radio group -->
 <fieldset>
-  <legend class="font-semibold mb-2">Choose an option</legend>
+  <legend class="mb-2 font-semibold">Choose an option</legend>
 
   <div class="flex items-center gap-2">
     <Radio id="option1" name="options" value="1" bind:group={selected} class="text-primary-500" />
@@ -334,9 +326,7 @@ The `element` prop enables custom HTML replacement (advanced feature).
   }
 </script>
 
-<Button element={customElement} class="preset-filled-primary-500">
-  Button as Link
-</Button>
+<Button element={customElement} class="preset-filled-primary-500">Button as Link</Button>
 ```
 
 ## Best Practices
@@ -345,6 +335,6 @@ The `element` prop enables custom HTML replacement (advanced feature).
 2. **Pass classes for styling** - Component classes get automatic precedence
 3. **Leverage Svelte 5 runes** - Use `$state`, `$derived`, `$effect` for reactivity
 4. **Apply theme-aware colors** - Use color pairings for consistent theming
-5. **Semantic attributes** - Include aria-* and data-* attributes for accessibility
+5. **Semantic attributes** - Include aria-_ and data-_ attributes for accessibility
 6. **Preset combinations** - Combine presets with additional Tailwind utilities
 7. **State management** - Components use Zag.js internally for consistent behavior

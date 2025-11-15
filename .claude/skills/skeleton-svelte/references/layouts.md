@@ -36,6 +36,7 @@ Use semantic elements to organize page regions for better accessibility and SEO:
 **Important:** Prioritize the `<body>` element as the scrollable page element over child elements.
 
 This approach preserves:
+
 - Mobile pull-to-refresh functionality
 - Browser UI auto-hiding behavior
 - Print styles and page breaks
@@ -45,9 +46,9 @@ This approach preserves:
 ```svelte
 <!-- app.html or root layout -->
 <html class="h-full">
-<body class="h-full overflow-y-auto">
-  <!-- App content -->
-</body>
+  <body class="h-full overflow-y-auto">
+    <!-- App content -->
+  </body>
 </html>
 ```
 
@@ -64,7 +65,7 @@ This approach preserves:
 </div>
 
 <!-- Responsive grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
   <!-- Responsive columns -->
 </div>
 
@@ -75,7 +76,7 @@ This approach preserves:
 </div>
 
 <!-- Row control -->
-<div class="grid grid-rows-3 gap-4 h-screen">
+<div class="grid h-screen grid-rows-3 gap-4">
   <div class="row-span-1">Header</div>
   <div class="row-span-2">Content</div>
 </div>
@@ -103,7 +104,7 @@ This approach preserves:
 </div>
 
 <!-- Centering -->
-<div class="flex items-center justify-center h-screen">
+<div class="flex h-screen items-center justify-center">
   <div>Centered content</div>
 </div>
 ```
@@ -138,18 +139,18 @@ Use Tailwind's mobile-first breakpoint prefixes:
 ### Single-Column Layout
 
 ```svelte
-<div class="h-full flex flex-col">
-  <header class="sticky top-0 z-10 bg-surface-50-950 border-b border-surface-300-700">
+<div class="flex h-full flex-col">
+  <header class="sticky top-0 z-10 border-b border-surface-300-700 bg-surface-50-950">
     <!-- Header content -->
   </header>
 
   <main class="flex-1 overflow-y-auto">
-    <div class="container mx-auto px-4 py-8 max-w-4xl">
+    <div class="container mx-auto max-w-4xl px-4 py-8">
       <!-- Main content -->
     </div>
   </main>
 
-  <footer class="bg-surface-100-900 border-t border-surface-300-700">
+  <footer class="border-t border-surface-300-700 bg-surface-100-900">
     <!-- Footer content -->
   </footer>
 </div>
@@ -158,9 +159,9 @@ Use Tailwind's mobile-first breakpoint prefixes:
 ### Two-Column Layout (Sidebar + Main)
 
 ```svelte
-<div class="h-full grid grid-cols-1 md:grid-cols-[250px_1fr]">
+<div class="grid h-full grid-cols-1 md:grid-cols-[250px_1fr]">
   <!-- Sidebar -->
-  <aside class="bg-surface-100-900 h-screen overflow-y-auto sticky top-0">
+  <aside class="sticky top-0 h-screen overflow-y-auto bg-surface-100-900">
     <nav class="p-4">
       <!-- Navigation items -->
     </nav>
@@ -178,9 +179,9 @@ Use Tailwind's mobile-first breakpoint prefixes:
 ### Three-Column Layout
 
 ```svelte
-<div class="h-full grid grid-cols-1 lg:grid-cols-[250px_minmax(0,900px)_250px] gap-4">
+<div class="grid h-full grid-cols-1 gap-4 lg:grid-cols-[250px_minmax(0,900px)_250px]">
   <!-- Left sidebar -->
-  <aside class="hidden lg:block bg-surface-100-900">
+  <aside class="hidden bg-surface-100-900 lg:block">
     <!-- Left nav -->
   </aside>
 
@@ -190,7 +191,7 @@ Use Tailwind's mobile-first breakpoint prefixes:
   </main>
 
   <!-- Right sidebar -->
-  <aside class="hidden lg:block bg-surface-100-900">
+  <aside class="hidden bg-surface-100-900 lg:block">
     <!-- Right nav -->
   </aside>
 </div>
@@ -199,21 +200,21 @@ Use Tailwind's mobile-first breakpoint prefixes:
 ### Dashboard Layout
 
 ```svelte
-<div class="h-full grid grid-rows-[auto_1fr]">
+<div class="grid h-full grid-rows-[auto_1fr]">
   <!-- Top navigation -->
-  <header class="sticky top-0 z-20 bg-surface-50-950 border-b border-surface-300-700">
+  <header class="sticky top-0 z-20 border-b border-surface-300-700 bg-surface-50-950">
     <!-- Header -->
   </header>
 
   <div class="grid grid-cols-1 md:grid-cols-[200px_1fr]">
     <!-- Side navigation -->
-    <aside class="bg-surface-100-900 overflow-y-auto">
+    <aside class="overflow-y-auto bg-surface-100-900">
       <!-- Sidebar -->
     </aside>
 
     <!-- Main dashboard area -->
     <main class="overflow-y-auto p-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         <!-- Dashboard cards -->
       </div>
     </main>
@@ -277,7 +278,7 @@ When stacking multiple sticky elements, use CSS `calc()` for dynamic offsets:
 Use `minmax()` within grid definitions for responsive layouts that maintain maximum widths:
 
 ```svelte
-<div class="grid grid-cols-1 lg:grid-cols-[250px_minmax(0,900px)_250px] mx-auto">
+<div class="mx-auto grid grid-cols-1 lg:grid-cols-[250px_minmax(0,900px)_250px]">
   <!-- Left sidebar: 250px -->
   <aside><!-- Sidebar --></aside>
 
@@ -295,14 +296,15 @@ Ensure html and body extend full viewport height:
 
 ```css
 /* In global CSS */
-html, body {
+html,
+body {
   @apply h-full;
 }
 ```
 
 ```svelte
 <!-- Then use flex or grid for full-height layouts -->
-<div class="h-full flex flex-col">
+<div class="flex h-full flex-col">
   <header><!-- Header --></header>
   <main class="flex-1 overflow-y-auto"><!-- Main --></main>
   <footer><!-- Footer --></footer>

@@ -102,7 +102,7 @@ Create custom presets by combining Skeleton and Tailwind utilities in global sty
 ```css
 /* In your global CSS */
 .preset-glass {
-  @apply bg-surface-50-950/10 backdrop-blur-md border border-surface-300-700;
+  @apply border border-surface-300-700 bg-surface-50-950/10 backdrop-blur-md;
 }
 ```
 
@@ -150,7 +150,7 @@ Create custom presets by combining Skeleton and Tailwind utilities in global sty
 
 ```css
 .preset-elevated {
-  @apply preset-filled-surface-50-950 shadow-lg hover:shadow-xl transition-shadow;
+  @apply preset-filled-surface-50-950 shadow-lg transition-shadow hover:shadow-xl;
 }
 ```
 
@@ -176,9 +176,7 @@ Presets can be combined with additional utilities:
 
 ```svelte
 <!-- Preset + spacing + shadows -->
-<Button class="preset-filled-primary-500 px-6 py-3 shadow-md">
-  Enhanced Button
-</Button>
+<Button class="preset-filled-primary-500 px-6 py-3 shadow-md">Enhanced Button</Button>
 
 <!-- Preset + responsive utilities -->
 <Card class="preset-outlined-surface-300-700 md:preset-filled-surface-100-900">
@@ -186,7 +184,5 @@ Presets can be combined with additional utilities:
 </Card>
 
 <!-- Preset + state utilities -->
-<Button class="preset-tonal-primary hover:preset-filled-primary-500">
-  State-changing button
-</Button>
+<Button class="preset-tonal-primary hover:preset-filled-primary-500">State-changing button</Button>
 ```
