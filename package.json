@@ -42,5 +42,8 @@
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint ."
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "marked": "^17.0.0"
+  }
 }

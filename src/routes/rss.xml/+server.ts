@@ -1,5 +1,5 @@
 import { getRecentPosts, getRawPostBySlug, type Post } from '$lib/utils/posts';
-import { compile } from 'mdsvex';
+import { marked } from 'marked';
 
 const siteUrl = 'https://martinemde.com';
 const siteTitle = 'Martin Emde';
@@ -34,21 +34,12 @@ async function feedItems(posts: Post[]): Promise<string> {
       // Get the raw markdown content
       const rawContent = getRawPostBySlug(post.slug);
 
-      // Convert markdown to HTML using mdsvex
+      // Convert markdown to HTML
       let htmlContent = '';
       if (rawContent) {
         // Remove frontmatter from the raw content
         const contentWithoutFrontmatter = rawContent.replace(/^---[\s\S]*?---\n/, '');
-        const compiled = await compile(contentWithoutFrontmatter);
-        if (compiled?.code) {
-          // Extract the HTML from the compiled Svelte component
-          // mdsvex wraps content in a Svelte component, we need just the HTML
-          htmlContent = compiled.code
-            .replace(/<script[\s\S]*?<\/script>/g, '')
-            .replace(/<\/script>/g, '')
-            .replace(/export default [\s\S]*$/g, '')
-            .trim();
-        }
+        htmlContent = await marked(contentWithoutFrontmatter);
       }
 
       return `
@@ -58,7 +49,6 @@ async function feedItems(posts: Post[]): Promise<string> {
 			<link>${siteUrl}/blog/${post.slug}</link>
 			<guid isPermaLink="true">${siteUrl}/blog/${post.slug}</guid>
 			<pubDate>${new Date(post.date).toUTCString()}</pubDate>
-			${post.author ? `<author>${siteEmail} (${escapeXml(post.author)})</author>` : ''}
 			<content:encoded><![CDATA[${htmlContent}]]></content:encoded>
 		</item>`;
     })
