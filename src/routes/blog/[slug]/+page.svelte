@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from '$app/stores';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
@@ -11,7 +12,15 @@
   {/if}
 </svelte:head>
 
-<article>
+<article class="relative">
+  <a
+    href="/blog/{$page.params.slug}.txt"
+    class="absolute right-0 top-0 rounded-full bg-surface-100-900 px-3 py-1 text-xs font-medium text-surface-600-400 transition-colors hover:bg-surface-200-800 hover:text-surface-900-50"
+    title="View plain text version"
+  >
+    txt
+  </a>
+
   <header class="mb-8 border-b border-surface-200-800 pb-8">
     {#if data.metadata.title}
       <h1 class="mb-4 text-4xl font-bold">{data.metadata.title}</h1>
